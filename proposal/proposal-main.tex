@@ -1,0 +1,88 @@
+\documentclass{article}
+
+% Macro Section
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumitem}
+\usepackage{amsthm}
+\usepackage{xcolor}
+\usepackage{lastpage}
+
+\renewcommand{\bf}[1]{\textbf{#1}}
+\renewcommand{\it}[1]{\textit{#1}}
+\renewcommand*{\l}{\ensuremath{\left}}
+\renewcommand*{\r}{\ensuremath{\right}}
+
+\newcommand*{\setbackgroundcolour}{\pagecolor[RGB]{32,32,33}}
+\newcommand*{\settextcolour}{\color[RGB]{229,229,229}}
+\newcommand*{\invertbackgroundtext}{\setbackgroundcolour\settextcolour}
+\newcommand{\dqt}[1]{``#1''}
+\newcommand*{\e}{\ensuremath{\epsilon}}
+\newcommand*{\N}{\ensuremath{\mathbb{N}}}
+\newcommand*{\R}{\ensuremath{\mathbb{R}}}
+\newcommand*{\Z}{\ensuremath{\mathbb{Z}}}
+\newcommand*{\Q}{\ensuremath{\mathbb{Q}}}
+\newcommand*{\I}{\ensuremath{\mathbb{I}}}
+\newcommand*{\contradicts}{\ensuremath{\rightarrow\leftarrow}}
+
+% \invertbackgroundtext
+% \header{Stephen Ermshar}{MATH 496 - Proposal}{2020 January 31, 5pm}
+% \footer{}{\thepage\ of \pageref{LastPage}}{}
+% \printanswers
+
+% Assignment: Formal Research Proposal
+% Having identified your research topic and in consultation with your research supervisor, your next step is to develop a short (one page) research proposal that outlines the following information:
+
+% A title and your research supervisor
+% A brief overview of prior research in your topic
+% The research you are proposing to do
+% A list of relevant references that you have consulted (i.e. a Bibliography).
+% Create a single PDF file of your proposal and upload it using the box provided below.  Print out a copy of the proposal, have your research supervisor sign it, and bring it to class with you on Friday, 31 January.
+
+\title{
+    \LARGE
+    Research Proposal for Stephen Ermshar\\
+    \large
+    Senior Mathematics Seminar (MATH 496)\\
+    Winter Quarter, 2020}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section*{Title}\vspace{-1em}
+
+Persistent Homology in Image Recognition, Networks, and Data Analysis
+
+\section*{Advisor}\vspace{-1em}
+
+Dr. Foster
+
+\section*{Topic Overview}\vspace{-1em}
+
+Persistent Homology (PH) studies homological features that remain persistent as some metric changes. PH has been used to identify or track features in images persist at different scales, orientations, and positions; It has also been used to study Networks, for instance how networks of friends on Facebook evolve over time. PH can also be used to detect features that other data analysis methods miss.
+
+In Practice PH is used on Simplicial Complexes that are generated from data, since computing homology on a Simplicial Complex can be done fast enough to be useful in real world settings.
+
+\section*{Research Overview}\vspace{-1em}
+This project will aim to explore the methods used in PH and how PH is computed. I would like to find examples where a task wouldn't have been possible, or would have been difficult, without the use of PH. One example of this from the bibliography is a case where periodic behavior was detected by PH in a data set, but was not detected by other methods of analysis.
+\newpage
+
+\section*{Bibliography}
+
+Aktas, M. E., Akbas, E., \& Fatmaoui, A. E. (2019). Persistence homology of networks: Methods and applications. Applied Network Science, 4(1), 61. https://doi.org/10.1007/s41109-019-0179-3
+\\[1em]
+Carlsson, G., Diaconis, P., Guibas, L., de Silva, V., Collins, A., Zomorodian, A., Ishkanov, T., Holmes, S., \& Ringach, D. (n.d.). Persistent Homology and the Analysis of High Dimensional Data. 71.
+\\[1em]
+Ghrist, R. (n.d.). Three Examples of Applied \& Computational Homology. 5.
+Jose A. Perea, J. H. (2013). Sliding Windows and Persistence: An Application of Topological Methods to Signal Analysis. http://arxiv.org/pdf/1307.6188.pdf
+\\[1em]
+Koplik, G. (2019). Persistent Homology: A Non-Mathy Introduction with Examples. http://towardsdatascience.com/persistent-homology-with-examples-1974d4b9c3d0
+\\[1em]
+Wagner, H., \& Dlotko, P. (2014). Towards topological analysis of high-dimensional feature spaces. Computer Vision and Image Understanding, 121, 21-26.\\https://doi.org/10.1016/j.cviu.2014.01.005
+\\[1em]
+Yang, \& Oyen,  et al. (2019). Image classification using topological features automatically extracted from graph representation of images.\\http://www.mlgworkshop.org/2019/papers/MLG2019\_paper\_7.pdf
+
+
+\end{document}
