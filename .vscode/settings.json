@@ -9,5 +9,28 @@
         "borderWidth": "1px",
         "borderStyle": "solid",
         "borderColor": "rgba(255,0,0,0.6)"
+    },
+    "cSpell.words": [
+        "Beamer",
+        "minipage",
+        "minipages"
+    ],
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "**/*.log": true,
+        "**/*.aux": true,
+        "**/*.synctex.gz": true,
+        "**/*.fdb_latexmk": true,
+        "**/*.fls": true,
+        "**/*.dvi": true,
+        "**/*.nav": true,
+        "**/*.out": true,
+        "**/*.snm": true,
+        "**/*.toc": true,
+        "**/*.vrb": true
     }
 }

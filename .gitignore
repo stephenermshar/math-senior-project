@@ -6,3 +6,8 @@
 *.fdb_latexmk
 *.fls
 *.dvi
+*.nav
+*.out
+*.snm
+*.toc
+*.vrb
