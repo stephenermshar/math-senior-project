@@ -12,6 +12,7 @@
     },
     "cSpell.words": [
         "Beamer",
+        "Simplicial",
         "minipage",
         "minipages"
     ],
@@ -31,6 +32,8 @@
         "**/*.out": true,
         "**/*.snm": true,
         "**/*.toc": true,
-        "**/*.vrb": true
+        "**/*.vrb": true,
+        "**/*.bbl": true,
+        "**/*.blg": true
     }
 }
