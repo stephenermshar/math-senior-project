@@ -1,5 +1,5 @@
 % \documentclass{beamer}
-\documentclass[handout]{beamer}
+\documentclass{beamer}
 
 \usepackage{amsmath}
 \usepackage{datetime2}
@@ -19,7 +19,8 @@
 \bibliographystyle{unsrtnat}
 
 % get rid of junk
-\usetheme{default}
+\usetheme{Darmstadt}
+\useoutertheme{miniframes}
 \beamertemplatenavigationsymbolsempty
 \hypersetup{pdfpagemode=UseNone} % don't show bookmarks on
 
@@ -55,6 +56,32 @@
     \insertdate
 \end{center}
 }
+
+
+\definecolor{bblue}{rgb}{0.05, 0.15, 0.25}
+\definecolor{rred}{rgb}{0.6, 0.4, 0.4}
+
+\makeatletter
+\AtBeginDocument{
+ {
+\usebeamerfont*{headline}
+\usebeamercolor{normal text}
+\usebeamercolor{title in head/foot}
+\usebeamercolor{subsection in head/foot}
+\usebeamercolor{section in head/foot}
+\usebeamercolor{frametitle}
+
+   \pgfdeclareverticalshading{beamer@aboveframetitle}{\the\paperwidth}{%
+   color(0ex)=(bblue);%
+   color(2ex)=(bblue);%
+  color(2ex)=(bblue)%
+  }
+ \pgfdeclareverticalshading{beamer@belowframetitle}{\the\paperwidth}{%
+  color(2ex)=(rred);%
+  color(0ex)=(bblue)%
+  }
+}}
+\makeatother
 
 \title{Persistent Homology}
 \subtitle{Computations and Applications}
