@@ -22,10 +22,21 @@
 \section[Homology]{Homology}
 \subsection{Simplicial Homology}
 \begin{frame}
+	\begin{definition}
+		A \textbf{Simplicial Complex} is a finite collection of finite sets such that every subset of every element in the collection is also an element in the collection. \cite{wagner}
+	\end{definition}
 	\begin{figure}
 		\input{tikz-example-complex-sd9aa.tex}
 		\caption{Example Simplicial Complex with one hole and one void.}
 	\end{figure}
+	\begin{align*}
+		S = \{&
+			(4,5,7), (5,6,7), (4,6,7), (4,5,6),\\
+			&(1,2), (2,3), (3,4), (2,4), (4,5), (5,6), (6,7), (4,7),
+			(4,6),\\
+			&(1), (2), (3), (4), (5), (6), (7)
+		\}
+	\end{align*}
 \end{frame}
 \subsection{Computations}
 \begin{frame}
