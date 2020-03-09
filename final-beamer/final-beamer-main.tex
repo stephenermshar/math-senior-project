@@ -27,6 +27,8 @@
 		\input{tikz-annulus-point-cloud-l23k29.tex}
 		\caption{Motivation Example}
 	\end{figure}
+	% As a preview, we're going to use these points to construct an object that we can do calculations on, and then we're going to look at how that object changes and doesn't change at different resolutions to see what parts are the most important.
+	% before we look at exactly how we construct this object we'll look at how to do the calculations on it.
 \end{frame}
 
 \section[Homology]{Homology}
@@ -40,16 +42,21 @@
 		\caption{Example Simplicial Complex with two connected components, one hole, and one void.}
 	\end{figure}
 	\begin{align*}
-		S = \{&
-			(4,5,7), (5,6,7), (4,6,7), (4,5,6),\\
-			&(1,2), (2,3), (3,4), (2,4), (4,5), (5,6), (6,7), (4,7),
-			(4,6),\\
+		S = \{
+			&(4,5,7), (5,6,7), (4,6,7), (4,5,6),\\
+			&(1,2), (2,3), (3,4), (2,4), (4,5), (5,6),
+			(6,7), (4,7),(4,6),\\
 			&(1), (2), (3), (4), (5), (6), (7), (8)
 		\}
 	\end{align*}
 \end{frame}
+
 \subsection{Computations}
 \begin{frame}
+	A Simplex is a group.
+	\begin{definition}
+		The \textbf{Boundary Homomorphism} is a function that takes a simplex and returns its boundary.
+	\end{definition}
 \end{frame}
 
 
@@ -67,6 +74,7 @@
 \begin{frame}{Bibliography}
 	\nocite{wagner}
 	\nocite{hatcher}
+	\nocite{fraleigha}
 	\nocite{singh}
 	% https://tex.stackexchange.com/a/22654
 	\begingroup
