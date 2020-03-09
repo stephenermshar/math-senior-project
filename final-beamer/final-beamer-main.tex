@@ -35,11 +35,21 @@
 \subsection{Simplicial Homology}
 \begin{frame}
 	\begin{definition}
+		An oriented \textbf{\(n\)-Simplex} will be represented as an \(n\)-tuple of vertices.
+	\end{definition}
+	\begin{figure}
+		\input{tikz-basic-simplices-1m42sd.tex}
+		\caption{Examples of basic simplices.}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\begin{definition}
 		A \textbf{Simplicial Complex} is a finite collection of finite sets such that every subset of every element in the collection is also an element in the collection. \cite{wagner}
 	\end{definition}
 	\begin{figure}
 		\input{tikz-example-complex-sd9aa.tex}
-		\caption{Example Simplicial Complex with two connected components, one hole, and one void.}
+		\caption{Example simplicial complex with two connected components, one hole, and one void.}
 	\end{figure}
 	\begin{align*}
 		S = \{
@@ -53,7 +63,6 @@
 
 \subsection{Computations}
 \begin{frame}
-	A Simplex is a group.
 	\begin{definition}
 		The \textbf{Boundary Homomorphism} is a function that takes a simplex and returns its boundary.
 	\end{definition}
