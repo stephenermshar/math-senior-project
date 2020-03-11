@@ -90,6 +90,10 @@
 		\end{align*}
 		\cite{wagner}
 	\end{block}
+	\begin{figure}
+		\input{tikz-example-cech-nl21k3j4.tex}
+		\caption{A \v{C}ech Complex built from a point cloud.}
+	\end{figure}
 \end{frame}
 
 \begin{frame}
@@ -100,14 +104,21 @@
 		\end{align*}
 		\cite{wagner}
 	\end{block}
+	\begin{figure}
+		\input{tikz-example-rips-2jk3l4k.tex}
+		\caption{A Rips Complex built from a point cloud.}
+	\end{figure}
 \end{frame}
 
 \begin{frame}
 	\begin{block}{Witness Complex}
-		\begin{align*}
-		\end{align*}
-		\cite{desilva}
+		Given a set of points and a subset of \textit{landmark} points an edge \(\sigma = (a,b) \in W_\infty\) if an only if there is a point \(p\) where landmarks \(a\) and \(b\) are the closest points to \(p\).
+		\cite{silva}
 	\end{block}
+	\begin{itemize}
+		\item Calculates homology on a smaller set than \v{C}ech and Rips Complexes.
+		\item \v{C}ech and Rips Complexes have as many vertices as points in the original data set.
+	\end{itemize}
 \end{frame}
 
 \subsection{Persistence Diagrams}
@@ -124,7 +135,6 @@
 	\nocite{wagner}
 	\nocite{hatcher}
 	\nocite{fraleigha}
-	\nocite{singh}
 	% https://tex.stackexchange.com/a/22654
 	\begingroup
 	\renewcommand{\section}[2]{}%

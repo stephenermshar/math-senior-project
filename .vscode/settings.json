@@ -15,8 +15,10 @@
         "Beamer",
         "Simplicial",
         "filtrations",
+        "ifundefined",
         "minipage",
         "minipages",
+        "rqtf",
         "simplicies"
     ],
     "files.exclude": {
