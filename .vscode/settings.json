@@ -16,7 +16,8 @@
         "Simplicial",
         "filtrations",
         "minipage",
-        "minipages"
+        "minipages",
+        "simplicies"
     ],
     "files.exclude": {
         "**/.git": true,

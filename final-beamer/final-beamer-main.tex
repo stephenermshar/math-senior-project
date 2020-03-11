@@ -35,7 +35,7 @@
 \subsection{Simplicial Homology}
 \begin{frame}
 	\begin{definition}
-		An oriented \textbf{\(n\)-Simplex} will be represented as an \(n\)-tuple of vertices.
+		An oriented \textbf{\(n\)-Simplex} will be represented as an tuple of \(n+1\) vertices.
 	\end{definition}
 	\begin{figure}
 		\input{tikz-basic-simplices-1m42sd.tex}
@@ -59,16 +59,58 @@
 	\end{align*}
 \end{frame}
 
-\subsection{Computations}
 \begin{frame}
 	\begin{definition}
-		The \textbf{Boundary Homomorphism} is a function that takes a simplex and returns its boundary.
+		The \textbf{Boundary Homomorphism} \(\partial_n : C_n \to C_{n-1}\) maps elements from the group of \(n\)-simplicies to elements in the group of \((n-1)\)-simplicies and is defined by
+		\[
+			\partial_n (v_0,\dots , v_{n}) = \sum_{i=0}^n (-1)^{i}
+			(v_0,\dots, \widehat{v_i}, \dots, v_n)
+		\]
+		\cite{hatcher}
 	\end{definition}
+	\begin{align*}
+		\partial_2 (4,5,7) = (5,7) - (4,7) + (4,5)
+	\end{align*}
+	\begin{align*}
+		\partial_1 [(5,7) - (4,7) + (4,5)] = (7) - (5) - (7) + (4) + (5) - (4) = 0
+	\end{align*}
+\end{frame}
+\subsection{Computations}
+\begin{frame}
 \end{frame}
 
 
 \section[Persistence]{Persistent Homology}
 \subsection{\v{C}ech, Rips, and Witness Complexes}
+\begin{frame}
+	\begin{block}{\v{C}ech Complex}
+		\begin{align*}
+			\text{\v{C}ech}(r) := \{ \sigma \subseteq P
+				| \bigcap_{x\in \sigma} B_x(r) \}
+		\end{align*}
+		\cite{wagner}
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	\begin{block}{Rips Complex}
+		\begin{align*}
+			\text{Rips}(r) := \{ \sigma \subseteq P
+				| \max_{a,b \in \sigma} d(a,b) < 2r \}
+		\end{align*}
+		\cite{wagner}
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	\begin{block}{Witness Complex}
+		\begin{align*}
+		\end{align*}
+		\cite{desilva}
+	\end{block}
+\end{frame}
+
+\subsection{Persistence Diagrams}
 \begin{frame}
 \end{frame}
 
