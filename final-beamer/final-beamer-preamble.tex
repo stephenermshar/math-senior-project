@@ -20,9 +20,16 @@
 \usepackage{tikz}
 \usepackage{yhmath}
 
+\DeclareMathOperator{\Ima}{Im}
+\DeclareMathOperator{\Ker}{Ker}
+\newcommand*{\Z}{\mathbb{Z}}
+
 \usetikzlibrary{fadings}
 \usetikzlibrary{patterns}
 \usetikzlibrary{shadows.blur}
+\usetikzlibrary{arrows}
+\usetikzlibrary{decorations.markings}
+\usetikzlibrary{positioning}
 \usefonttheme[onlymath]{serif}
 
 \pgfplotsset{compat=1.16}
@@ -41,3 +48,5 @@
 
 \usetheme{Darmstadt}
 \beamertemplatenavigationsymbolsempty
+
+\newcommand{\bigslant}[2]{{\raisebox{.2em}{$#1$}\left/\raisebox{-.2em}{$#2$}\right.}}
