@@ -85,8 +85,7 @@
 \begin{frame}
 	\begin{block}{\v{C}ech Complex}
 		\begin{align*}
-			\text{\v{C}ech}(r) := \{ \sigma \subseteq P
-				| \bigcap_{x\in \sigma} B_x(r) \}
+			\text{\v{C}ech}(r) := \{ \sigma \subseteq P | \bigcap_{x\in \sigma} B_x(r) \neq \emptyset \}
 		\end{align*}
 		\cite{wagner}
 	\end{block}
@@ -110,23 +109,12 @@
 	\end{figure}
 \end{frame}
 
-\begin{frame}
-	\begin{block}{Witness Complex}
-		Given a set of points and a subset of \textit{landmark} points an edge \(\sigma = (a,b) \in W_\infty\) if an only if there is a point \(p\) where landmarks \(a\) and \(b\) are the closest points to \(p\).
-		\cite{silva}
-	\end{block}
-	\begin{itemize}
-		\item Calculates homology on a smaller set than \v{C}ech and Rips Complexes.
-		\item \v{C}ech and Rips Complexes have as many vertices as points in the original data set.
-	\end{itemize}
-\end{frame}
-
 \subsection{Persistence Diagrams}
 \begin{frame}
 \end{frame}
 
 \section{Applications}
-\subsection{Visualization and Compression}
+\subsection{Visualization, Compression, and Data Segmentation}
 \begin{frame}
 \end{frame}
 
