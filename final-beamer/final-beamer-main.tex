@@ -97,35 +97,77 @@
 
 \subsection{Computations}
 \begin{frame}
-	\begin{figure}
-		\input{tikz-homology-calc-example-lkj3h4.tex}
-		\caption{A simple complex for calculating homology groups.}
-	\end{figure}
-	\begin{align*}
-		&C_2 = \langle (1,2,3) \rangle \\
-		&C_1 = \langle (1,2),(1,3),(2,3),(2,4),(3,4) \rangle \\
-	\end{align*}
-	\begin{align*}
-		\Ima (\partial_2) = \langle (2,3) - (1,3) + (2,3) \rangle \simeq \Z
-	\end{align*}
+	\begin{columns}
+		\column{.4\textwidth}
+		\begin{figure}
+			\input{tikz-homology-calc-example-lkj3h4.tex}
+		\end{figure}
+		\column{.6\textwidth}
+		\begin{align*}
+			&C_2 = \langle (1,2,3) \rangle \\
+			&C_1 = \langle (1,2),(1,3),(2,3),(2,4),(3,4) \rangle \\
+			&C_0 = \langle (1),(2),(3),(4) \rangle
+		\end{align*}
+	\end{columns}
+	\begin{overlayarea}{\linewidth}{.5\textheight}
+		\only<1-2>{
+			\onslide<1->{\begin{align*}
+				\Ima (\partial_2) = \langle (2,3) - (1,3) + (2,3) \rangle \simeq \Z
+			\end{align*}}
+			\onslide<2->{
+			\begin{align*}
+				\Ker (\partial_1) = \{ s \in C_1 : \partial_1(s) = 0\}
+			\end{align*}}
+		}
+
+		\only<3-5>{
+			\begin{align*}
+				\onslide<3-5>{
+				\partial_1(C_1) &= \partial_1 [ a(1,2) + b(1,3) + c(2,3) + d(2,4) + e(3,4)]\\}
+				\onslide<4-5>{
+				&= a(2) - a(1) + b(3) - b(1) + c(3) - c(2)\\
+				&\qquad + d(4) - d(2) + e(4) - e(3) \\}
+				\onslide<5->{
+				&= (-a - b)(1) + (a - c - d)(2) + (b + c - e)(3)\\ &\qquad + (d + e)(4)
+				}
+			\end{align*}
+		}
+
+		\only<6>{
+			\begin{align*}
+					\partial_1(C_1) &=
+					\begin{bmatrix}
+						(1)\\(2)\\(3)\\(4)\\
+					\end{bmatrix}^T
+					\begin{bmatrix}
+						-1 & -1 &  0 &  0 &  0 \\
+						 1 &  0 & -1 & -1 &  0 \\
+						 0 &  1 &  1 &  0 & -1 \\
+						 0 &  0 &  0 &  1 &  1 \\
+					\end{bmatrix}
+					\begin{bmatrix}
+						a\\b\\c\\d\\e\\
+					\end{bmatrix}
+			\end{align*}
+		}
+		\only<7>{
+			\begin{align*}
+				\begin{bmatrix}
+					-1 & -1 &  0 &  0 &  0 \\
+					1 &  0 & -1 & -1 &  0 \\
+					0 &  1 &  1 &  0 & -1 \\
+					0 &  0 &  0 &  1 &  1 \\
+				\end{bmatrix}
+				\begin{bmatrix}
+					a\\b\\c\\d\\e\\
+				\end{bmatrix}
+				= \begin{bmatrix}
+					0\\0\\0\\0\\
+				\end{bmatrix}
+			\end{align*}
+		}
+	\end{overlayarea}
 \end{frame}
-
-\begin{frame}
-	\begin{figure}
-		\input{tikz-homology-calc-example-lkj3h4.tex}
-		\caption{A simple complex for calculating homology groups.}
-	\end{figure}
-	\begin{align*}
-		&C_2 = \langle (1,2,3) \rangle \\
-		&C_1 = \langle (1,2),(1,3),(2,3),(2,4),(3,4) \rangle \\
-	\end{align*}
-	\begin{align*}
-		\Ima (\partial_2) = \langle (2,3) - (1,3) + (2,3) \rangle \simeq \Z
-	\end{align*}
-\end{frame}
-
-
-
 
 
 \section[Persistence]{Persistent Homology}
