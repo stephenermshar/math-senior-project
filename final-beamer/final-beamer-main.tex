@@ -152,35 +152,43 @@
 		}
 		\only<7>{
 			\begin{align*}
+				\nul
 				\begin{bmatrix}
 					-1 & -1 &  0 &  0 &  0 \\
-					1 &  0 & -1 & -1 &  0 \\
-					0 &  1 &  1 &  0 & -1 \\
-					0 &  0 &  0 &  1 &  1 \\
+					 1 &  0 & -1 & -1 &  0 \\
+					 0 &  1 &  1 &  0 & -1 \\
+					 0 &  0 &  0 &  1 &  1 \\
 				\end{bmatrix}
+				=
 				\begin{bmatrix}
-					a\\b\\c\\d\\e\\
-				\end{bmatrix}
-				= \begin{bmatrix}
-					0\\0\\0\\0\\
+					c - e \\
+					-c + e \\
+					c \\
+					-e \\
+					e
 				\end{bmatrix}
 			\end{align*}
 		}
 		\only<8>{
 			\begin{align*}
-				\begin{bmatrix}
-					1 &  0 & -1 &  0 &  1 \\
-					0 &  1 &  1 &  0 & -1 \\
-					0 &  0 &  0 &  1 &  1 \\
-					0 &  0 &  0 &  0 &  0 \\
-				\end{bmatrix}
-				\begin{bmatrix}
-					a\\b\\c\\d\\e\\
-				\end{bmatrix}
-				= \begin{bmatrix}
-					0\\0\\0\\0\\
-				\end{bmatrix}
+				\Ker (\partial_1)
+				&= (c - e)(1,2) + (-c + e)(1,3) \\
+				&\qquad + (c)(2,3) + (-e)(2,4) + (e)(3,4) \\
+				&= (c)[(1,2) + (2,3) - (1,3)] \\
+				&\qquad + (e)[(1,3) + (3,4) - (2,4) - (1,2)] \\
+				&\simeq \Z \times \Z
 			\end{align*}
+		}
+		\only<9>{
+			\begin{align*}
+				H_1
+				= \bigslant{\Ker(\partial_1)}{\Ima(\partial_{2})}
+				= \bigslant{\Z \times \Z}{\Z}
+				\simeq \Z
+			\end{align*}
+			\begin{center}
+				So there is a single one-dimensional hole in this complex
+			\end{center}
 		}
 	\end{overlayarea}
 \end{frame}
