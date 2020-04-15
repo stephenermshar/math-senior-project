@@ -109,39 +109,47 @@
 			\input{tikz-homology-calc-example-lkj3h4.tex}
 		\end{figure}
 		\column{.6\textwidth}
-		\begin{align*}
-			&C_2 = \langle (1,2,3) \rangle \\
-			&C_1 = \langle (1,2),(1,3),(2,3),(2,4),(3,4) \rangle \\
-			&C_0 = \langle (1),(2),(3),(4) \rangle
-		\end{align*}
-	\end{columns}
-	\begin{overlayarea}{\linewidth}{.5\textheight}
-		\only<1-2>{
-			\onslide<1->{\begin{align*}
-				\Ima (\partial_2) = \langle (2,3) - (1,3) + (1,2) \rangle \simeq \Z
-			\end{align*}}
-			\onslide<2->{
+		\only<1->{
 			\begin{align*}
-				\Ker (\partial_1) = \{ s \in C_1 : \partial_1(s) = 0\}
-			\end{align*}}
-		}
-
-		\only<3-5>{
-			\begin{align*}
-				\onslide<3-5>{
-				\partial_1(C_1) &= \partial_1 [ a(1,2) + b(1,3) + c(2,3) + d(2,4) + e(3,4)]\\}
-				\onslide<4-5>{
-				&= a(2) - a(1) + b(3) - b(1) + c(3) - c(2)\\
-				&\qquad + d(4) - d(2) + e(4) - e(3) \\}
-				\onslide<5->{
-				&= (-a - b)(1) + (a - c - d)(2) + (b + c - e)(3)\\ &\qquad + (d + e)(4)
+				\onslide<1-10>{
+					C_1 &= \langle (1,2),(1,3),(2,3),(2,4),(3,4) \rangle \\
+				}
+				\onslide<11-14>{
+					C_2 &= \langle (1,2,3) \rangle \\
+				}
+				\uncover<10,14->{
+					l_1 &= (2,3) - (1,3) + (1,2) \\
+				}
+				\uncover<10,15->{
+					l_0 &= (1,3) + (3,4) - (2,4) - (1,2)
 				}
 			\end{align*}
 		}
-
-		\only<6>{
+	\end{columns}
+	\begin{overlayarea}{\linewidth}{.6\textheight}
+		\only<1>{
 			\begin{align*}
-					\partial_1(C_1) &=
+				\partial_1 [C_1] = 0
+			\end{align*}
+		}
+		\only<2-4>{
+			\begin{align*}
+				\onslide<2->{
+					&\partial_1 [\ a(1,2) + b(1,3) + c(2,3) + d(2,4) + e(3,4)\ ] = 0 \\
+				}
+				\onslide<3->{
+					&= a(2) - a(1) + b(3) - b(1) + c(3) - c(2)\\
+					&\qquad + d(4) - d(2) + e(4) - e(3) \\
+				}
+				\onslide<4->{
+					&= (-a - b)(1) + (a - c - d)(2) + (b + c - e)(3)\\
+					&\qquad + (d + e)(4)
+				}
+			\end{align*}
+		}
+		\only<5>{
+			\begin{align*}
+				\partial_1(C_1) &=
 					\begin{bmatrix}
 						(1)\\(2)\\(3)\\(4)\\
 					\end{bmatrix}^T
@@ -154,9 +162,10 @@
 					\begin{bmatrix}
 						a\\b\\c\\d\\e\\
 					\end{bmatrix}
+					= 0
 			\end{align*}
 		}
-		\only<7>{
+		\only<6>{
 			\begin{align*}
 				\nul
 				\begin{bmatrix}
@@ -175,30 +184,59 @@
 				\end{bmatrix}
 			\end{align*}
 		}
-		\only<8>{
+		\only<7-10>{
 			\begin{align*}
-				\Ker (\partial_1)
-				&= (c - e)(1,2) + (-c + e)(1,3) \\
-				&\qquad + (c)(2,3) + (-e)(2,4) + (e)(3,4) \\
-				&= (c)[(1,2) + (2,3) - (1,3)] \\
-				&\qquad + (e)[(1,3) + (3,4) - (2,4) - (1,2)] \\
-				&\simeq \Z \times \Z
+				\onslide<7->{
+					\Ker (\partial_1)
+					&= (c - e)(1,2) + (-c + e)(1,3) \\
+					&\qquad + (c)(2,3) + (-e)(2,4) + (e)(3,4) \\
+				}
+				\onslide<8->{
+					&= (c)[(1,2) + (2,3) - (1,3)] \\
+					&\qquad + (e)[(1,3) + (3,4) - (2,4) - (1,2)] \\
+				}
+				\onslide<9->{
+					&= \langle [(1,2) + (2,3) - (1,3)], [(1,3) + (3,4) - (2,4) - (1,2)] \rangle \\
+				}
+				\onslide<10->{
+					&= \langle l_1, l_0 \rangle
+				}
 			\end{align*}
 		}
-		\only<9>{
+		\only<11-14>{
 			\begin{align*}
-				H_1
-				= \bigslant{\Ker(\partial_1)}{\Ima(\partial_{2})}
-				= \bigslant{\Z \times \Z}{\Z}
-				\simeq \Z
+				\onslide<11->{
+					\Ima (\partial_2) &= \partial_2 [C_2] \\
+				}
+				\onslide<12->{
+					&= \partial_2 [\ a(1,2,3) \ ] \\
+				}
+				\onslide<13->{
+					&= a(\ (2,3) - (1,3) + (1,2) \ )\\
+				}
+				\onslide<14->{
+					&= \langle l_1 \rangle
+				}
 			\end{align*}
-			\begin{center}
-				So there is a single one-dimensional hole in this complex
-			\end{center}
+		}
+		\only<15->{
+			\begin{align*}
+				\onslide<15->{
+					H_1 &= \bigslant{\Ker (\partial_1)}{\Ima (\partial_2)}
+					= \bigslant{\langle l_1, l_0 \rangle}{\langle l_1 \rangle}\\
+				}
+				\onslide<16->{
+					&= \langle l_1 + l_0 \rangle
+					= \langle (2,3) + (3,4) - (2,4) \rangle
+					\simeq \Z
+				}
+			\end{align*}
+			\uncover<16->{
+				So there is a single one-dimensional hole in the complex that is surrounded by the cycles \(\langle (2,3) + (3,4) - (2,4) \rangle\)!
+			}
 		}
 	\end{overlayarea}
 \end{frame}
-
 
 \section[Persistence]{Persistent Homology}
 \subsection{Persistence Diagrams}
