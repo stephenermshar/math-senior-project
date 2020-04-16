@@ -4,6 +4,7 @@
 *.aux
 *.synctex.gz
 *.synctex
+*.synctex(busy)
 *.fdb_latexmk
 *.fls
 *.dvi

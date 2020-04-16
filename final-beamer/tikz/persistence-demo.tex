@@ -29,39 +29,28 @@ pattern radius = 1pt}
 \begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
 
     \def\points{
-        (240,312),
-        (230,238),
-        (282,164),
-        (300,320),
-        (348,180),
-        (348,336),
-        (398,262),
-        (406,322)
+        (134,150),
+        (166,136),
+        (118,298),
+        (178,312),
+        (114,222),
+        (232,342),
+        (322,232),
+        (316,324),
+        (280,342),
+        (504,284),
+        (418,350),
+        (388,184),
+        (292,126),
+        (324,172),
+        (234,108),
+        (246,154),
+        (162,192),
+        (458,210),
+        (362,348)
     }
 
-    % \def\points{
-    %     (134,150),
-    %     (166,136),
-    %     (118,298),
-    %     (178,312),
-    %     (114,222),
-    %     (232,342),
-    %     (322,232),
-    %     (316,324),
-    %     (280,342),
-    %     (504,284),
-    %     (418,350),
-    %     (388,184),
-    %     (292,126),
-    %     (324,172),
-    %     (234,108),
-    %     (246,154),
-    %     (162,192),
-    %     (458,210),
-    %     (362,348)
-    % }
-
-    \foreach \r [count=\ri from 2] in {40, 50, 60, 85}{
+    \foreach \r [count=\ri from 2] in {40, 50, 60, 95}{
         \foreach \p in \points{
             \draw
                 [color={rgb, 255:red, 165; green, 232; blue, 255}]
@@ -77,14 +66,14 @@ pattern radius = 1pt}
                 \pgfgetlastxy{\ax}{\ay}
                 \path \b;
                 \pgfgetlastxy{\bx}{\by}
-                \pgfmathsetmacro\thresh{2*\r}
-                % The 23 on the following line is there because
+                \pgfmathsetmacro\thresh{1.5*\r}
+                % The adjustment on the following line is there because
                 % this calculation connected some vertices before the
                 % circles drawn underneath overlapped. the adjustment
                 % doesn't appear to make the graph incorrect and forces
                 % the vertices to wait longer before connecting, though
                 % it is concerning.
-                \pgfmathsetmacro\dist{veclen(\ax-\bx,\ay-\by)+23}
+                \pgfmathsetmacro\dist{veclen(\ax-\bx,\ay-\by)}
                 \ifnum\ai<\bi
                     \ifdim\dist pt<\thresh pt
                         \draw
@@ -104,9 +93,6 @@ pattern radius = 1pt}
             [opacity=1]
             \p circle
             [radius= 3.35];
-        % \draw % mark nodes for debugging
-        %     [opacity=1]
-        %     \x+(10,10) node {\(\pi\)};
     }
 
 \end{tikzpicture}
