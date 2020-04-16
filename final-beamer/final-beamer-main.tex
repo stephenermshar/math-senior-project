@@ -110,6 +110,7 @@
 		\end{figure}
 		\column{.6\textwidth}
 		\only<1->{
+			% use \ell or lambda for loops, or other alphabets
 			\begin{align*}
 				\onslide<1-10>{
 					C_1 &= \langle (1,2),(1,3),(2,3),(2,4),(3,4) \rangle \\
@@ -226,13 +227,13 @@
 					= \bigslant{\langle l_1, l_0 \rangle}{\langle l_1 \rangle}\\
 				}
 				\onslide<16->{
-					&= \langle l_1 + l_0 \rangle
-					= \langle (2,3) + (3,4) - (2,4) \rangle
+					&= \langle l_1 + l_0 + \langle l_1\rangle \rangle
+					= \langle (2,3) + (3,4) - (2,4) + \langle l_1 \rangle \rangle
 					\simeq \Z
 				}
 			\end{align*}
 			\uncover<16->{
-				So there is a single one-dimensional hole in the complex that is surrounded by the cycles \(\langle (2,3) + (3,4) - (2,4) \rangle\)!
+				So there is a single one-dimensional hole in the complex that is surrounded by the cycles \( (2,3) + (3,4) - (2,4) \).
 			}
 		}
 	\end{overlayarea}
