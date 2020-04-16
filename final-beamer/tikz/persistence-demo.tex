@@ -29,28 +29,28 @@ pattern radius = 1pt}
 \begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
 
     \def\points{
-        (134,150),
+        (111,164),
         (166,136),
-        (118,298),
-        (178,312),
+        (126,298),
+        (182,312),
         (114,222),
         (232,342),
-        (322,232),
-        (316,324),
+        (332,236),
+        (325,312),
         (280,342),
-        (504,284),
-        (418,350),
+        (484,284),
+        (418,342),
         (388,184),
         (292,126),
-        (324,172),
+        (322,172),
         (234,108),
         (246,154),
         (162,192),
-        (458,210),
+        (454,224),
         (362,348)
     }
 
-    \foreach \r [count=\ri from 2] in {40, 50, 60, 95}{
+    \foreach \r [count=\ri from 2] in {30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95}{
         \foreach \p in \points{
             \draw
                 [color={rgb, 255:red, 165; green, 232; blue, 255}]
@@ -93,6 +93,9 @@ pattern radius = 1pt}
             [opacity=1]
             \p circle
             [radius= 3.35];
+        % \draw % mark nodes for debugging
+        %     [opacity=1]
+        %     \p+(10,10) node {\(\p\)};
     }
 
 \end{tikzpicture}
