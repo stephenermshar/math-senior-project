@@ -20,6 +20,7 @@
 \usepackage{tikz}
 \usepackage{yhmath}
 \usepackage{hyperref}
+\usepackage{ifthen}
 
 \DeclareMathOperator{\Ima}{Im}
 \DeclareMathOperator{\Ker}{Ker}
@@ -32,8 +33,18 @@
 \usetikzlibrary{arrows}
 \usetikzlibrary{decorations.markings}
 \usetikzlibrary{positioning}
+\usetikzlibrary{calc}
+\usetikzlibrary{math}
 
 \pgfplotsset{compat=1.16}
+
+\makeatletter
+\newcommand{\gettikzxy}[3]{%
+  \tikz@scan@one@point\pgfutil@firstofone#1\relax
+  \edef#2{\the\pgf@x}%
+  \edef#3{\the\pgf@y}%
+}
+\makeatother
 
 \DTMnewdatestyle{mydateformat}{%
   \renewcommand{\DTMdisplaydate}[4]{%

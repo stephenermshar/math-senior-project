@@ -1,0 +1,88 @@
+\tikzset{
+pattern size/.store in=\mcSize,
+pattern size = 5pt,
+pattern thickness/.store in=\mcThickness,
+pattern thickness = 0.3pt,
+pattern radius/.store in=\mcRadius,
+pattern radius = 1pt}
+\makeatletter
+\pgfutil@ifundefined{pgf@pattern@name@_iy1rqtf17}{
+\pgfdeclarepatternformonly[\mcThickness,\mcSize]{_iy1rqtf17}
+{\pgfqpoint{0pt}{0pt}}
+{\pgfpoint{\mcSize+\mcThickness}{\mcSize+\mcThickness}}
+{\pgfpoint{\mcSize}{\mcSize}}
+{
+\pgfsetcolor{\tikz@pattern@color}
+\pgfsetlinewidth{\mcThickness}
+\pgfpathmoveto{\pgfqpoint{0pt}{0pt}}
+\pgfpathlineto{\pgfpoint{\mcSize+\mcThickness}{\mcSize+\mcThickness}}
+\pgfusepath{stroke}
+}}
+\makeatother
+
+% https://ipfs-sec.stackexchange.cloudflare-ipfs.com/tex/A/question/6135.html
+\tikzset{every picture/.style={line width=0.75pt, opacity=0}} %set default line width to 0.75pt
+\tikzset{onslide/.code args={<#1>#2}{%
+    \only<#1>{\pgfkeysalso{#2}} % \pgfkeysalso doesn't change the path
+}}
+
+\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+
+    \coordinate (1) at (240,312);
+    \coordinate (2) at (230,238);
+    \coordinate (3) at (282,164);
+    \coordinate (4) at (300, 320);
+    \coordinate (5) at (348,180);
+    \coordinate (6) at (348,336);
+    \coordinate (7) at (398,262);
+    \coordinate (8) at (406,322);
+
+    \foreach \r [count=\ri from 2] in {40, 50, 60, 85}{
+        \foreach \x in {(1),(2),(3),(4),(5),(6),(7),(8)}{
+            \draw
+                [color={rgb, 255:red, 165; green, 232; blue, 255}]
+                [fill={rgb, 255:red, 165; green, 232; blue, 255}]
+                [onslide=<{\ri}>{opacity=1}]
+                [line width=0]
+                \x circle
+                [radius=\r];
+        }
+        \foreach \a [count=\ai] in {(1),(2),(3),(4),(5),(6),(7),(8)}{
+            \foreach \b [count=\bi] in {(1),(2),(3),(4),(5),(6),(7),(8)}{
+                \path \a;
+                \pgfgetlastxy{\ax}{\ay}
+                \path \b;
+                \pgfgetlastxy{\bx}{\by}
+                \pgfmathsetmacro\thresh{2*\r}
+                % The 23 on the following line is there because
+                % this calculation connected some vertices before the
+                % circles drawn underneath overlapped. the adjustment
+                % doesn't appear to make the graph incorrect and forces
+                % the vertices to wait longer before connecting, though
+                % it is concerning.
+                \pgfmathsetmacro\dist{veclen(\ax-\bx,\ay-\by)+23}
+                \ifnum\ai<\bi
+                    \ifdim\dist pt<\thresh pt
+                        \draw
+                        [onslide=<{\ri}>{opacity=1}]
+                        \a -- \b;
+                    \fi
+                \fi
+
+            }
+        }
+    }
+
+    % Vertices go at the bottom so they're on top of the rest
+    \foreach \x [count=\xi] in {(1),(2),(3),(4),(5),(6),(7),(8)}{
+        \draw
+            [black, fill=black]
+            [opacity=1]
+            \x circle
+            [x radius= 3.35, y radius= 3.35];
+        % \draw % mark nodes for debugging
+        %     [opacity=1]
+        %     \x+(10,10) node {\(\xi\)};
+    }
+
+\end{tikzpicture}
