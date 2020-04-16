@@ -28,27 +28,51 @@ pattern radius = 1pt}
 
 \begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
 
-    \coordinate (1) at (240,312);
-    \coordinate (2) at (230,238);
-    \coordinate (3) at (282,164);
-    \coordinate (4) at (300, 320);
-    \coordinate (5) at (348,180);
-    \coordinate (6) at (348,336);
-    \coordinate (7) at (398,262);
-    \coordinate (8) at (406,322);
+    \def\points{
+        (240,312),
+        (230,238),
+        (282,164),
+        (300,320),
+        (348,180),
+        (348,336),
+        (398,262),
+        (406,322)
+    }
+
+    % \def\points{
+    %     (134,150),
+    %     (166,136),
+    %     (118,298),
+    %     (178,312),
+    %     (114,222),
+    %     (232,342),
+    %     (322,232),
+    %     (316,324),
+    %     (280,342),
+    %     (504,284),
+    %     (418,350),
+    %     (388,184),
+    %     (292,126),
+    %     (324,172),
+    %     (234,108),
+    %     (246,154),
+    %     (162,192),
+    %     (458,210),
+    %     (362,348)
+    % }
 
     \foreach \r [count=\ri from 2] in {40, 50, 60, 85}{
-        \foreach \x in {(1),(2),(3),(4),(5),(6),(7),(8)}{
+        \foreach \p in \points{
             \draw
                 [color={rgb, 255:red, 165; green, 232; blue, 255}]
                 [fill={rgb, 255:red, 165; green, 232; blue, 255}]
                 [onslide=<{\ri}>{opacity=1}]
                 [line width=0]
-                \x circle
+                \p circle
                 [radius=\r];
         }
-        \foreach \a [count=\ai] in {(1),(2),(3),(4),(5),(6),(7),(8)}{
-            \foreach \b [count=\bi] in {(1),(2),(3),(4),(5),(6),(7),(8)}{
+        \foreach \a [count=\ai] in \points{
+            \foreach \b [count=\bi] in \points{
                 \path \a;
                 \pgfgetlastxy{\ax}{\ay}
                 \path \b;
@@ -74,15 +98,15 @@ pattern radius = 1pt}
     }
 
     % Vertices go at the bottom so they're on top of the rest
-    \foreach \x [count=\xi] in {(1),(2),(3),(4),(5),(6),(7),(8)}{
+    \foreach \p [count=\pi] in \points{
         \draw
             [black, fill=black]
             [opacity=1]
-            \x circle
-            [x radius= 3.35, y radius= 3.35];
+            \p circle
+            [radius= 3.35];
         % \draw % mark nodes for debugging
         %     [opacity=1]
-        %     \x+(10,10) node {\(\xi\)};
+        %     \x+(10,10) node {\(\pi\)};
     }
 
 \end{tikzpicture}
