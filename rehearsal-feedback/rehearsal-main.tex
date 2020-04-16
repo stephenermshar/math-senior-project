@@ -1,0 +1,64 @@
+\documentclass{exam}
+
+% Macro Section
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumitem}
+\usepackage{amsthm}
+\usepackage{xcolor}
+\usepackage{lastpage}
+\usepackage{graphicx}
+
+\renewcommand{\bf}[1]{\textbf{#1}}
+\renewcommand{\it}[1]{\textit{#1}}
+\renewcommand*{\l}{\ensuremath{\left}}
+\renewcommand*{\r}{\ensuremath{\right}}
+
+\newcommand*{\setbackgroundcolour}{\pagecolor[rgb]{0.15,0.15,0.15}}
+\newcommand*{\settextcolour}{\color[rgb]{0.9,0.9,0.9}}
+\newcommand*{\invertbackgroundtext}{\setbackgroundcolour\settextcolour}
+\newcommand{\dqt}[1]{``#1''}
+\newcommand*{\e}{\ensuremath{\epsilon}}
+\newcommand*{\N}{\ensuremath{\mathbb{N}}}
+\newcommand*{\R}{\ensuremath{\mathbb{R}}}
+\newcommand*{\Z}{\ensuremath{\mathbb{Z}}}
+\newcommand*{\Q}{\ensuremath{\mathbb{Q}}}
+\newcommand*{\I}{\ensuremath{\mathbb{I}}}
+\newcommand*{\contradicts}{\ensuremath{\rightarrow\leftarrow}}
+\newcommand{\code}[1]{\texttt{#1}}
+
+\header{Stephen Ermshar}{MATH 497 - Rehearsal Feedback}{2020 April 15, 11:59 pm}
+\footer{}{\thepage\ of \pageref{LastPage}}{}
+\printanswers
+\setlength\parindent{0pt}
+
+\begin{document}
+
+Presentation: Persistent Homology
+
+Advisor: Dr. Foster
+
+\bigskip
+
+I rehearsed my presentation on Tuesday April 14, 2020 at 2pm with Dr. Foster, and then reviewed changes again today (wednesday) at 3pm.
+
+\bigskip
+
+Suggestions:
+\begin{itemize}
+    \item Correct an error I had where I incorrectly called two groups equal.
+    \item Use variables like \(\ell\) or \(\lambda\) to represent elements of interest in groups, like certain cycles that were referenced multiple times, instead of writing out the whole element.
+    \item Write groups using generators and angle brackets instead of only writing them as linear combinations.
+    \item Avoid referring to an outside video to demonstrate persistence.
+    \item Make the connection to the barcodes and persistence diagrams more clear or direct
+    \item Don't need to worry too much about focusing on applications or demos at this point.
+\end{itemize}
+
+Other Changes Made:
+\begin{itemize}
+    \item Added a set diagram to explain the kernel and image more clearly on the homology group slide.
+    \item Reordered the steps of the homology calculation to make it more streamlined.
+    \item Added a demonstration of persistence on a point cloud.
+\end{itemize}
+
+\end{document}
