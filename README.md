@@ -25,6 +25,8 @@ advisor following a rehearsal of the presentation.
 
 The last major assignment in the first half of the senior seminar sequence.
 
+[Document to be submitted Download](https://github.com/stephenermshar/math-senior-project/releases/download/beamer-final-draft-1/final-beamer-main.pdf)
+
 _This document has not been submitted._
 
 ## Final Paper
