@@ -50,6 +50,8 @@ pattern radius = 1pt}
         (362,348)
     }
 
+    % This will take a few minutes to run, and it's not efficiently written,
+    % though I don't really have time to investigate the mysteries of latex.
     \foreach \r [count=\ri from 2] in {30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95}{
         \foreach \p in \points{
             \draw
@@ -66,13 +68,14 @@ pattern radius = 1pt}
                 \pgfgetlastxy{\ax}{\ay}
                 \path \b;
                 \pgfgetlastxy{\bx}{\by}
-                \pgfmathsetmacro\thresh{1.5*\r}
-                % The adjustment on the following line is there because
+                % The adjustment to the radius on the following line,
+                % as opposed to using `2*\r`, is there because
                 % this calculation connected some vertices before the
                 % circles drawn underneath overlapped. the adjustment
                 % doesn't appear to make the graph incorrect and forces
                 % the vertices to wait longer before connecting, though
                 % it is concerning.
+                \pgfmathsetmacro\thresh{1.5*\r}
                 \pgfmathsetmacro\dist{veclen(\ax-\bx,\ay-\by)}
                 \ifnum\ai<\bi
                     \ifdim\dist pt<\thresh pt
