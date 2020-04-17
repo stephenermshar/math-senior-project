@@ -62,6 +62,11 @@ pattern radius = 1pt}
                 \p circle
                 [radius=\r];
         }
+
+        \draw
+            [onslide=<{\ri}>{opacity=1}]
+            (100, 100) node {\(r = \r\)};
+
         \foreach \a [count=\ai] in \points{
             \foreach \b [count=\bi] in \points{
                 \path \a;
@@ -100,5 +105,9 @@ pattern radius = 1pt}
         %     [opacity=1]
         %     \p+(10,10) node {\(\p\)};
     }
+
+    \draw
+    [onslide=<1>{opacity=1}]
+    (100, 100) node {\(r = 0\)};
 
 \end{tikzpicture}
