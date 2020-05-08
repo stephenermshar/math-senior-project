@@ -1,0 +1,61 @@
+\documentclass{exam}
+
+% Macro Section
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumitem}
+\usepackage{amsthm}
+\usepackage{xcolor}
+\usepackage{lastpage}
+\usepackage{graphicx}
+
+\renewcommand{\bf}[1]{\textbf{#1}}
+\renewcommand{\it}[1]{\textit{#1}}
+\renewcommand*{\l}{\ensuremath{\left}}
+\renewcommand*{\r}{\ensuremath{\right}}
+
+\newcommand*{\setbackgroundcolour}{\pagecolor[rgb]{0.15,0.15,0.15}}
+\newcommand*{\settextcolour}{\color[rgb]{0.9,0.9,0.9}}
+\newcommand*{\invertbackgroundtext}{\setbackgroundcolour\settextcolour}
+\newcommand{\dqt}[1]{``#1''}
+\newcommand*{\e}{\ensuremath{\epsilon}}
+\newcommand*{\N}{\ensuremath{\mathbb{N}}}
+\newcommand*{\R}{\ensuremath{\mathbb{R}}}
+\newcommand*{\Z}{\ensuremath{\mathbb{Z}}}
+\newcommand*{\Q}{\ensuremath{\mathbb{Q}}}
+\newcommand*{\I}{\ensuremath{\mathbb{I}}}
+\newcommand*{\contradicts}{\ensuremath{\rightarrow\leftarrow}}
+\newcommand{\code}[1]{\texttt{#1}}
+
+\header{Stephen Ermshar}{MATH 497 - Rehearsal Feedback}{2020 April 29, 5:00 pm}
+\footer{}{\thepage\ of \pageref{LastPage}}{}
+\printanswers
+\setlength\parindent{0pt}
+
+\begin{document}
+
+Presentation: Persistent Homology
+
+Advisor: Dr. Foster
+
+\bigskip
+
+I met with Dr. Foster at 3:00pm on 2020 April 29 to go over the presentation.
+
+\bigskip
+
+Improvements
+\begin{itemize}
+    \item add examples that can be referred back to throughout the paper.
+    \item computer persistent homology for the original homology example.
+    \item introduce the 4 point example (or some simple equivalent) at the beginning when talking about connecting points, then return to it when computing homology and persistent homology.
+    \item points can be in higher then \(\R^2\) for examples to help illustrate more details.
+    \item the same 4 point example can continue to be used when demonstrating the construction of persistence barcodes and diagrams.
+\end{itemize}
+
+Expansions:
+\begin{itemize}
+    \item expand on applications, specifically look for ways to interpret what a hole in data means, or how it can be used to understand the data.
+\end{itemize}
+
+\end{document}
