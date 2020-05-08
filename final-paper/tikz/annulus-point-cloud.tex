@@ -1,0 +1,20 @@
+\tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt
+
+\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-0.5,xscale=0.5]
+    \begin{scope}[shift={(-200,0)}]
+        \begin{axis}[
+            axis line style={draw=none},
+            tick style={draw=none},
+            yticklabels={,,},
+            xticklabels={,,}
+        ]
+        \addplot table [scatter, only marks, x=x, y=y, col sep=comma] {tikz/annulus-point-cloud-data.csv};
+        \end{axis}
+    \end{scope}
+
+    \draw[->] (100, 100) -- (150, 100);
+
+    \begin{scope}[shift={(-120,-40)}]
+        \draw  [draw opacity=0][fill={rgb, 255:red, 74; green, 144; blue, 226 }  ,fill opacity=1 ,even odd rule] (357,153.5) .. controls (357,121.19) and (383.19,95) .. (415.5,95) .. controls (447.81,95) and (474,121.19) .. (474,153.5) .. controls (474,185.81) and (447.81,212) .. (415.5,212) .. controls (383.19,212) and (357,185.81) .. (357,153.5)(329,153.5) .. controls (329,105.73) and (367.73,67) .. (415.5,67) .. controls (463.27,67) and (502,105.73) .. (502,153.5) .. controls (502,201.27) and (463.27,240) .. (415.5,240) .. controls (367.73,240) and (329,201.27) .. (329,153.5) ;
+    \end{scope}
+\end{tikzpicture}

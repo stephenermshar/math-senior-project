@@ -1,12 +1,27 @@
-\documentclass[10pt,letterpaper]{amsart}
+\documentclass[10pt,letterpaper,english]{amsart}
 
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{amsthm}
 \usepackage{fancyhdr}
 \usepackage{graphicx}
+\usepackage{pgfplots}
+\usepackage{tikz}
+\usepackage{datetime2}
+\usepackage{natbib}
+\usepackage{hyperref}
 
-\pagestyle{fancy}
+\pgfplotsset{compat=1.16}
+
+\DTMnewdatestyle{mydateformat}{%
+  \renewcommand{\DTMdisplaydate}[4]{%
+    \number##1\ % year
+    \DTMenglishmonthname{##2}\ % Month
+    \number##3% day
+  }%
+  \renewcommand{\DTMDisplaydate}{\DTMdisplaydate}%
+}
+\DTMsetdatestyle{mydateformat}
 
 % text dimensions
 \setlength{\textwidth}{6.5in}
@@ -15,6 +30,7 @@
 % adjust top margins
 \setlength{\topmargin}{0in}
 \setlength{\voffset}{-30pt}
+\setlength{\headheight}{12pt}
 
 % no room for notes on the side
 \setlength{\oddsidemargin}{0in}
@@ -44,3 +60,5 @@
 % Header Definitions
 \fancyhead[L]{\nouppercase{\rightmark}}
 \fancyhead[R]{\nouppercase{\leftmark}}
+
+\pagestyle{fancy}

@@ -2,6 +2,7 @@
 
 \title{Persistent Homology: Computations and Applications}
 \author{Stephen Ermshar}
+% \date{\DTMDisplaydate{2020}{5}{15}{}} % first draft due
 
 \begin{document}
 
@@ -12,7 +13,23 @@
 
 \section{A Section Title}
 
-Some content.
+Given a collection of points in \(n\)-dimensional space, we want to reveal qualitative properties of an underlying shape that the points may have been sampled from.
+
+\begin{figure}[h!]
+    \centering
+    \input{tikz/annulus-point-cloud.tex}
+    \caption{Motivation Example}
+\end{figure}
+
+High-dimensional data can be extracted from many sources, including images, health-data, and signals.
+
+\begin{definition}\label{cechc}
+    Given a set of points \(P\), and a distance \(r\), let \(B_x(r)\) be the ball with radius \(r\) around the point \(x\).
+    \begin{align*}
+        \textrm{\v{C}ech}(r) := \{ S \subseteq P | \bigcap_{x\in S} B_x(r) \neq \emptyset \}
+    \end{align*}
+    \cite{wagner}
+\end{definition}
 
 \begin{theorem}\label{obvious}
     A theorem.
@@ -21,5 +38,10 @@ Some content.
 \begin{proof}
     The theorem's proof.
 \end{proof}
+
+\newpage
+
+\bibliographystyle{alpha}
+\bibliography{../math496-7-zotero.bib}
 
 \end{document}
