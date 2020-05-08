@@ -1,0 +1,46 @@
+\documentclass[10pt,letterpaper]{amsart}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+
+\pagestyle{fancy}
+
+% text dimensions
+\setlength{\textwidth}{6.5in}
+\setlength{\textheight}{9in}
+
+% adjust top margins
+\setlength{\topmargin}{0in}
+\setlength{\voffset}{-30pt}
+
+% no room for notes on the side
+\setlength{\oddsidemargin}{0in}
+\setlength{\evensidemargin}{0in}
+\setlength{\marginparwidth}{0in}
+
+% space between paragraphs and lines
+\setlength{\parskip}{5pt}
+\linespread{1.05}
+
+% Hyphenation
+\numberwithin{equation}{section}
+\hyphenation{semi-stable}
+
+% Numbering for Theorems, Lemmas, etc.
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{remark}[theorem]{Remark}
+\numberwithin{equation}{section}
+
+% Header Definitions
+\fancyhead[L]{\nouppercase{\rightmark}}
+\fancyhead[R]{\nouppercase{\leftmark}}
