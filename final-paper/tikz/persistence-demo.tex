@@ -1,0 +1,113 @@
+\tikzset{
+pattern size/.store in=\mcSize,
+pattern size = 5pt,
+pattern thickness/.store in=\mcThickness,
+pattern thickness = 0.3pt,
+pattern radius/.store in=\mcRadius,
+pattern radius = 1pt}
+\makeatletter
+\pgfutil@ifundefined{pgf@pattern@name@_iy1rqtf17}{
+\pgfdeclarepatternformonly[\mcThickness,\mcSize]{_iy1rqtf17}
+{\pgfqpoint{0pt}{0pt}}
+{\pgfpoint{\mcSize+\mcThickness}{\mcSize+\mcThickness}}
+{\pgfpoint{\mcSize}{\mcSize}}
+{
+\pgfsetcolor{\tikz@pattern@color}
+\pgfsetlinewidth{\mcThickness}
+\pgfpathmoveto{\pgfqpoint{0pt}{0pt}}
+\pgfpathlineto{\pgfpoint{\mcSize+\mcThickness}{\mcSize+\mcThickness}}
+\pgfusepath{stroke}
+}}
+\makeatother
+
+% https://ipfs-sec.stackexchange.cloudflare-ipfs.com/tex/A/question/6135.html
+\tikzset{every picture/.style={line width=0.75pt, opacity=0}} %set default line width to 0.75pt
+\tikzset{onslide/.code args={<#1>#2}{%
+    \only<#1>{\pgfkeysalso{#2}} % \pgfkeysalso doesn't change the path
+}}
+
+\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+
+    \def\points{
+        (111,164),
+        (166,136),
+        (126,298),
+        (182,312),
+        (114,222),
+        (232,342),
+        (332,236),
+        (325,312),
+        (280,342),
+        (484,284),
+        (418,342),
+        (388,184),
+        (292,126),
+        (322,172),
+        (234,108),
+        (246,154),
+        (162,192),
+        (454,224),
+        (362,348)
+    }
+
+    % This will take a few minutes to run, and it's not efficiently written,
+    % though I don't really have time to investigate the mysteries of latex.
+    \foreach \r [count=\ri from 2] in {30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95}{
+        \foreach \p in \points{
+            \draw
+                [color={rgb, 255:red, 165; green, 232; blue, 255}]
+                [fill={rgb, 255:red, 165; green, 232; blue, 255}]
+                [onslide=<{\ri}>{opacity=1}]
+                [line width=0]
+                \p circle
+                [radius=\r];
+        }
+
+        \draw
+            [onslide=<{\ri}>{opacity=1}]
+            (100, 100) node {\(r = \r\)};
+
+        \foreach \a [count=\ai] in \points{
+            \foreach \b [count=\bi] in \points{
+                \path \a;
+                \pgfgetlastxy{\ax}{\ay}
+                \path \b;
+                \pgfgetlastxy{\bx}{\by}
+                % The adjustment to the radius on the following line,
+                % as opposed to using `2*\r`, is there because
+                % this calculation connected some vertices before the
+                % circles drawn underneath overlapped. the adjustment
+                % doesn't appear to make the graph incorrect and forces
+                % the vertices to wait longer before connecting, though
+                % it is concerning.
+                \pgfmathsetmacro\thresh{1.5*\r}
+                \pgfmathsetmacro\dist{veclen(\ax-\bx,\ay-\by)}
+                \ifnum\ai<\bi
+                    \ifdim\dist pt<\thresh pt
+                        \draw
+                        [onslide=<{\ri}>{opacity=1}]
+                        \a -- \b;
+                    \fi
+                \fi
+
+            }
+        }
+    }
+
+    % Vertices go at the bottom so they're on top of the rest
+    \foreach \p [count=\pi] in \points{
+        \draw
+            [black, fill=black]
+            [opacity=1]
+            \p circle
+            [radius= 3.35];
+        % \draw % mark nodes for debugging
+        %     [opacity=1]
+        %     \p+(10,10) node {\(\p\)};
+    }
+
+    \draw
+    [onslide=<1>{opacity=1}]
+    (100, 100) node {\(r = 0\)};
+
+\end{tikzpicture}
