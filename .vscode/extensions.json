@@ -5,6 +5,7 @@
         "eamodio.gitlens",
         "james-yu.latex-workshop",
         "streetsidesoftware.code-spell-checker",
-        "wengerk.highlight-bad-chars"
+        "wengerk.highlight-bad-chars",
+        "tecosaur.latex-utilities",
     ]
 }

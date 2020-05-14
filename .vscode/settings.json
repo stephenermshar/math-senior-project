@@ -40,5 +40,8 @@
         "**/*.vrb": true,
         "**/*.bbl": true,
         "**/*.blg": true
-    }
+    },
+    "workbench.colorTheme": "Solarized Light",
+    "latex-workshop.view.pdf.invert": 0.05,
+    "latex-utilities.countWord.path": "/Users/stephen/Library/TinyTeX/texmf-dist/scripts/texcount/texcount.pl"
 }
