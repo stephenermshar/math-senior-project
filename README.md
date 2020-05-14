@@ -21,3 +21,5 @@ as the presentation along with any additional work that has been done since. It 
 the last major assignment in the second half of the senior seminar sequence.
 
 _This document has not been submitted._
+
+View the source latex files in [./final-paper](./final-paper).
