@@ -35,9 +35,14 @@ To accomplish this goal in familiar dimensions a person might recognize that poi
 A natural first step would be to begin connecting pairs of points that are near each other with lines, this can be generalized to larger sets of points as well.
 Sets of three points near each other can be connected with a triangle, sets of four with a tetrahedron, and so on. A collection of these sets forms a simplicial complex on which we can apply methods from homology to find holes.
 
-When connecting the points in a data set different shapes may result depending on how close points must be to connect them. If this closeness requirement is too small then no points will be connected, and if it is too large, then all points will be connected. In either case no useful information about the structure of the data set is achieved. The structures
+When connecting the points in a data set different shapes may result depending on how close points must be to connect them.
+If this closeness requirement is too small then no points will be connected, and if it is too large, then all points will be connected.
+In either case no useful information about the structure of the data set is achieved.
+Instead, the most significant structures will be detected at a wide range of scales, so persistent homology calculates homology at multiple scales to find which features persist the most.
 
-This paper will first introduce a method for building a simplicial complex from a set of points, and \red{may explore alternate methods}. Section \ref{sec:homology} will introduce the topic of simplicial homology, and calculate the homology group for an example simplicial complex. Section \ref{sec:per-hom} will combine
+This paper will first introduce a method for building a simplicial complex from a set of points, and \red{may explore alternate methods}.
+Section \ref{sec:homology} will introduce the topic of simplicial homology, and calculate the homology group for an example simplicial complex.
+Section \ref{sec:per-hom} will show how calculating homology for complexes at multiple scales produces descriptive visualizations of the data, even in high dimensions. And Finally, Section \ref{sec:appls} will provide examples of cases where the visualizations produced by persistent homology provided meaningful information about a data set.
 
 % Given a collection of points in \(n\)-dimensional space, we want to reveal qualitative properties of an underlying shape that the points may have been sampled from.
 
@@ -59,7 +64,11 @@ This paper will first introduce a method for building a simplicial complex from 
 %     \cite{wagner}
 % \end{definition}
 
+Homology ca
+
 \subsection{Simplicial Homology}\label{subsec:simpl-hom}
+
+Homology can be quickly calculated on simplicial complexes using familiar tools from linear algebra.
 
 % \begin{definition}
 %     An oriented \textbf{n-Simplex} will be represented as an tuple of \(n+1\) vertices.
