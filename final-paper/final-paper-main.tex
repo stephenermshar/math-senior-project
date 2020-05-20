@@ -24,10 +24,10 @@ Given a collection of points in three or fewer dimensions, a person can easily m
 For instance, the points may appear to form distinct components, loops \figref{fig:annulus}, or hollow shapes.
 These are examples of shapes with zero, one, and two dimensional holes, respectively.
 
-\begin{figure}[h!]\label{fig:annulus}
-    \centering
+\begin{figure}
     \input{tikz/annulus-point-cloud.tex}
     \caption{A collection of points that form a loop.}
+    \label{fig:annulus}
 \end{figure}
 
 In higher dimensions such features cannot be easily observed by a person, additionally, it would be convenient to have a method for recognizing holes of any dimension.
@@ -57,6 +57,16 @@ And Finally, Section \ref{sec:appls} will provide examples of cases where the vi
 
 \section{Homology}\label{sec:homology}
 
+To find a hole we first need to define what a hole is.
+
+Homology is an abstraction that uses the concept of paths that form cycles in a space to look for paths that cannot be shrunk down to a single point.
+In general, to do this we'll find all possible cycles, and factor out those that surround solid areas of the space, leaving those that surround gaps.
+
+\begin{definition}
+    The \textbf{n-th Homology Group} is \(H_n = \bigslant{\Ker(\partial_n)}{\Ima(\partial_{n+1})}\)
+    \cite{fraleigha}.
+\end{definition}
+
 % \begin{definition}\label{defcechcomp}
 %     Given a set of points \(P\), and a distance \(r\), let \(B_x(r)\) be the ball with radius \(r\) around the point \(x\).
 %     \begin{align*}
@@ -65,11 +75,28 @@ And Finally, Section \ref{sec:appls} will provide examples of cases where the vi
 %     \cite{wagner}
 % \end{definition}
 
-Homology ca
-
 \subsection{Simplicial Homology}\label{subsec:simpl-hom}
 
-Homology can be quickly calculated on simplicial complexes using familiar tools from linear algebra.
+\begin{figure}
+    \input{tikz/homology-calc-example.tex}
+    \caption{A small simplicial complex with a single one dimensional cycle.}
+    \label{fig:4pt-comp-1}
+\end{figure}
+
+Homology can be efficiently calculated on simplicial complexes using familiar tools from linear and abstract algebra.
+
+To demonstrate homology calculations we'll start with an existing simplicial complex \figref{fig:4pt-comp-1}.
+
+\begin{figure}
+    \scalebox{.8}{
+        \input{tikz/homology-group-diagram.tex}
+    }
+    \caption{}
+    \label{fig:hom-sets}
+\end{figure}
+
+
+
 
 % \begin{definition}
 %     An oriented \textbf{n-Simplex} will be represented as an tuple of \(n+1\) vertices.
