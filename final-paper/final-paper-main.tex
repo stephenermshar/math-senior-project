@@ -20,164 +20,64 @@
 
 \section{Introduction}
 
-Given a collection of points in three or fewer dimensions, a person can easily make useful observations about the general shape of the data.
-For instance, the points may appear to form distinct components, loops \figref{fig:annulus}, or hollow shapes.
-These are examples of shapes with zero, one, and two dimensional holes, respectively.
+Persistent homology is a tool for understanding the shape of a data set.
+For instance, if a data set is a collection of points in two dimensional space, then it can be graphed in a plane.
+We can easily look at the graph and see whether the data clumps together in certain places, or if it forms more interesting shapes, like a loop.
+We can graph data in one and three dimensions as well, but with dimensions four and higher we're no longer able to intuitively and visually observe the data directly.
 
-\begin{figure}
-    \input{tikz/annulus-point-cloud.tex}
-    \caption{A collection of points that form a loop.}
-    \label{fig:annulus}
-\end{figure}
+In section \ref{sec:homology} we'll explore Homology, which gives us tools to understand structures analogous to holes in a shape, regardless of the dimension in which the shape is embedded.
+When we use Persistent Homology, we'll be converting our data into a form where we can apply tools from homology to understand it.
+There are a variety of ways to convert data into a form where homology can be applied, most of which, including the one we'll explore in section \ref{sec:cech-complex}, rely on the choice of a scale parameter.
+This scale parameter is used to determine whether points in the data set are related to each other based on the distance between them.
+We'll want to understand the structure of the data at multiple scales, so we'll look at its homology along a range of scale parameters.
+If a structure revealed by homology persists on a wide range of scales then we can feel more confident that this structure is a good approximation for the shape of the data.
+In section \ref{sec:persistent-homology} we'll look at different ways of visualizing a data set's homological structure along a range of scales.
 
-In higher dimensions such features cannot be easily observed by a person, additionally, it would be convenient to have a method for recognizing holes of any dimension.
-To accomplish this goal in familiar dimensions a person might recognize that points near each other are associated with each other.
-A natural first step would be to begin connecting pairs of points that are near each other with lines, this can be generalized to larger sets of points as well.
-Sets of three points near each other can be connected with a triangle, sets of four with a tetrahedron, and so on. A collection of these sets forms a simplicial complex on which we can apply methods from homology to find holes.
-
-When connecting the points in a data set different shapes may result depending on how close points must be to connect them.
-If this closeness requirement is too small then no points will be connected, and if it is too large, then all points will be connected.
-In either case no useful information about the structure of the data set is achieved.
-Instead, the most significant structures will be detected at a wide range of scales, so persistent homology calculates homology at multiple scales to find which features persist the most.
-
-This paper will first introduce a method for building a simplicial complex from a set of points, and \red{may explore alternate methods}.
-Section \ref{sec:homology} will introduce the topic of simplicial homology, and calculate the homology group for an example simplicial complex.
-Section \ref{sec:per-hom} will show how calculating homology for complexes at multiple scales produces descriptive visualizations of the data, even in high dimensions.
-And Finally, Section \ref{sec:appls} will provide examples of cases where the visualizations produced by persistent homology provided meaningful information about a data set.
-
-% Given a collection of points in \(n\)-dimensional space, we want to reveal qualitative properties of an underlying shape that the points may have been sampled from.
-
-% \begin{figure}[h!]
-%     \centering
-%     \input{tikz/annulus-point-cloud.tex}
-%     \caption{Motivation Example}
-% \end{figure}
-
-% High-dimensional data can be extracted from many sources, including images, health-data, and signals.
+Persistent Homology has been used in a wide variety of fields as a data analysis tool, and has some potential applications outside of data analysis as well.
+In section \ref{sec:applications} we'll look at some of these uses, and potentially provide a simple demonstration of an insight that can be gathered using persistent homology.
 
 \section{Homology}\label{sec:homology}
 
-To find a hole we first need to define what a hole is.
-
-Homology is an abstraction that uses the concept of paths that form cycles in a space to look for paths that cannot be shrunk down to a single point.
-In general, to do this we'll find all possible cycles, and factor out those that surround solid areas of the space, leaving those that surround gaps.
-
-\begin{definition}
-    The \textbf{n-th Homology Group} is \(H_n = \bigslant{\Ker(\partial_n)}{\Ima(\partial_{n+1})}\)
-    \cite{fraleigha}.
-\end{definition}
-
-% \begin{definition}\label{defcechcomp}
-%     Given a set of points \(P\), and a distance \(r\), let \(B_x(r)\) be the ball with radius \(r\) around the point \(x\).
-%     \begin{align*}
-%         \textrm{\v{C}ech}(r) := \{ S \subseteq P | \bigcap_{x\in S} B_x(r) \neq \emptyset \}
-%     \end{align*}
-%     \cite{wagner}
-% \end{definition}
-
-\subsection{Simplicial Homology}\label{subsec:simpl-hom}
+\subsection{Simplicial Homology}\label{sec:simplicial-homology}
+To calculate homology on our data we'll first need to convert it into a simplicial complex.
+A Simplicial complex is just a collection of sets of points from our dataset. Each of these sets of \(n+1\) points is called an \(n\)-simplex \figref{fig:basic-simplices}.
+To keep track of signs later on, we'll give each simplex an orientation which will be denoted by the order in which its points are listed.
+We'll arbitrarily choose to list the points in increasing order of the point's label.
+The resulting simplicial complex will be a graph-like structure, where pairs of connected points are connected by a line, triples by a triangle, four points by a tetrahedron, and \(n\) points by the \(n\)-dimensional analog of a triangle.
 
 \begin{figure}
-    \input{tikz/homology-calc-example.tex}
-    \caption{A small simplicial complex with a single one dimensional cycle.}
-    \label{fig:4pt-comp-1}
-\end{figure}
-
-Homology can be efficiently calculated on simplicial complexes using familiar tools from linear and abstract algebra.
-
-To demonstrate homology calculations we'll start with an existing simplicial complex \figref{fig:4pt-comp-1}.
-
-\begin{figure}
-    \scalebox{.8}{
-        \input{tikz/homology-group-diagram.tex}
-    }
+    \input{./tikz/basic-simplices.tex}
     \caption{}
-    \label{fig:hom-sets}
+    \label{fig:basic-simplices}
 \end{figure}
 
+\subsection{The Cech Complex}\label{sec:cech-complex}
 
+There are many ways of constructing simplicial complexes from data, but we'll focus on one of the more intuitive and original methods used, the cech complex.
 
+[cech complex definition]
 
-% \begin{definition}
-%     An oriented \textbf{n-Simplex} will be represented as an tuple of \(n+1\) vertices.
-% \end{definition}
+(should I explain the cech complex or expect the reader to labor over the definition if they're confused?)
 
-% \begin{figure}[h!]
-%     \input{tikz/basic-simplices.tex}
-%     \caption{Examples of basic simplices.}
-% \end{figure}
+the radius used in the cech complex is the scale parameter that we'll vary when looking for persistence.
 
-% \begin{definition}\label{defsimpcomp}
-%     A \textbf{Simplicial Complex} is a finite collection of finite sets such that every subset of every element in the collection is also an element in the collection. \cite{wagner}
-% \end{definition}
+One can observe that the cech complex fits the definition of a simplicial complex.
+% <!-- Since if balls around points in the set intersect at one scale parameter, then they certainly will when the scale parameter increases. -->
+Since if the balls around some points intersect then the balls around any subset of those points will also intersect.
 
-% \begin{figure}[h!]
-%     \input{tikz/example-complex.tex}
-%     \caption{Example simplicial complex with two connected components, one hole, and one void.}
-% \end{figure}
-
-% \begin{align*}
-%     C = \{
-%         &(4,5,7), (5,6,7), (4,6,7), (4,5,6),\quad (1,2), (2,3),\\ &(3,4), (2,4), (4,5), (5,6),(6,7),(4,7),(4,6),(5,7),\\
-%         &(1), (2), (3), (4), (5), (6), (7), (8)
-%     \}
-% \end{align*}
-
-% \begin{definition}\label{defbndhom}
-%     The \textbf{Boundary Homomorphism} \(\partial_n : C_n \to C_{n-1}\) maps elements from the group of \(n\)-simplicies to elements in the group of \((n-1)\)-simplicies and is defined by
-%     \[
-%         \partial_n (v_0,\dots , v_{n}) = \sum_{i=0}^n (-1)^{i}
-%         (v_0,\dots, \widehat{v_i}, \dots, v_n)
-%     \]
-%     \cite{hatcher}
-% \end{definition}
-
-% \begin{align*}
-%     \partial_2 (4,5,7) = (5,7) - (4,7) + (4,5)
-% \end{align*}
-
-% \begin{align*}
-%     \partial_1 [(5,7) - (4,7) + (4,5)] = (7) - (5) - (7) + (4) + (5) - (4) = 0
-% \end{align*}
-
-% \begin{definition}\label{defhomgrp}
-%     The \textbf{n-th Homology Group} is \(H_n = \bigslant{\Ker(\partial_n)}{\Ima(\partial_{n+1})}\)
-%     \cite{fraleigha}
-% \end{definition}
-
-% \begin{figure}[h!]
-%     \scalebox{.8}{
-%         \input{tikz/homology-group-diagram.tex}
-%     }
-% \end{figure}
+Given a simplicial complex we can draw it as a graph and observe its homological properties.
+Figure () demonstrates a simplicial complex with one hole surrounded by the simplices () () (), and a void surrounded by the simplices () () () ().
+It also has two connected components made up of the points () () () () () and () () () () ().
 
 \subsection{Computations}
 
-\section{Persistent Homology}\label{sec:per-hom}
+\section{Persistent Homology}\label{sec:persistent-homology}
 
 \subsection{Persistence Barcodes}
 
-% \begin{figure}[h!]
-%     \begin{center}
-%         \includegraphics[scale=0.5]{ipe/persistence-demo-barcode.pdf}
-%     \end{center}
-% \end{figure}
-
 \subsection{Persistence Diagrams}
 
-% \begin{figure}[h!]
-%     \begin{center}
-%         \includegraphics[scale=0.5]{ipe/persistence-demo-diagram.pdf}
-%     \end{center}
-%     \caption{Barcodes can be represented as persistence diagrams. Similarity between two persistence diagrams can be measured.}
-% \end{figure}
-
-\section{Applications}\label{sec:appls}
-
-% \begin{itemize}
-%     \item \textbf{Visualization} of high-dimensional data that can be difficult to understand or project into lower dimensions.
-%     \item The group \(H_0\) is related to the connected components of a complex, useful for \textbf{data segmentation}.
-% \end{itemize}
+\section{Applications}\label{sec:applications}
 
 \newpage
 
