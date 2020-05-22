@@ -2,10 +2,10 @@
 
 \title[Persistent Homology]{Persistent Homology: Computations and Applications}
 \author{Stephen Ermshar}
-\address{Walla Walla University}
+\address{Department of Mathematics, Walla Walla University, College Place, WA 99324}
 \thanks{Advisor: Dr. John Foster}
 
-\date{\DTMDisplaydate{2020}{5}{15}{}} % first draft due
+\date{\DTMDisplaydate{2020}{5}{22}{}} % advisor critique due
 
 \begin{document}
 
@@ -39,11 +39,18 @@ In section \ref{sec:applications} we'll look at some of these uses, and potentia
 \section{Homology}\label{sec:homology}
 
 \subsection{Simplicial Homology}\label{sec:simplicial-homology}
+
 To calculate homology on our data we'll first need to convert it into a simplicial complex.
 A Simplicial complex is just a collection of sets of points from our dataset. Each of these sets of \(n+1\) points is called an \(n\)-simplex \figref{fig:basic-simplices}.
 To keep track of signs later on, we'll give each simplex an orientation which will be denoted by the order in which its points are listed.
 We'll arbitrarily choose to list the points in increasing order of the point's label.
 The resulting simplicial complex will be a graph-like structure, where pairs of connected points are connected by a line, triples by a triangle, four points by a tetrahedron, and \(n\) points by the \(n\)-dimensional analog of a triangle.
+
+\begin{definition}\label{def:simplicial-complex}
+    A \textbf{Simplicial Complex} is a finite collection of finite sets such that every subset of every element in the collection is also an element in the collection. \cite{wagner}
+\end{definition}
+
+A simplicial complex has the additional requirement that every subset of every set in the complex is itself a set in the complex. This requirement ensures that if a simplex is in the complex then all of the components that make up that simplex are also in the complex. For instance, if we have a triangle, then we also have all of its edges and vertices.
 
 \begin{figure}
     \input{./tikz/basic-simplices.tex}
@@ -55,15 +62,20 @@ The resulting simplicial complex will be a graph-like structure, where pairs of 
 
 There are many ways of constructing simplicial complexes from data, but we'll focus on one of the more intuitive and original methods used, the cech complex.
 
-[cech complex definition]
+\begin{definition}\label{def:cech-complex}
+    Given a set of points \(P\), and a distance \(r\), let \(B_x(r)\) be the ball with radius \(r\) around the point \(x\). The \textbf{\v{C}ech Complex} is given by
+		\begin{align*}
+            \textrm{\v{C}ech}(r) := \{ S \subseteq P | \bigcap_{x\in S} B_x(r) \neq \emptyset \}
+            .
+		\end{align*}
+		\cite{wagner}
+\end{definition}
 
-(should I explain the cech complex or expect the reader to labor over the definition if they're confused?)
+% should I explain the cech complex or expect the reader to labor over the definition if they're confused?
 
-the radius used in the cech complex is the scale parameter that we'll vary when looking for persistence.
-
-One can observe that the cech complex fits the definition of a simplicial complex.
+The radius \(r\) used in the \v{C}ech Complex is the scale parameter that we'll vary when looking for persistence. One can observe that the \v{C}ech Complex fits the definition of a simplicial complex.
 % <!-- Since if balls around points in the set intersect at one scale parameter, then they certainly will when the scale parameter increases. -->
-Since if the balls around some points intersect then the balls around any subset of those points will also intersect.
+Since if the balls around some points intersect, then the balls around any subset of those points must also intersect.
 
 Given a simplicial complex we can draw it as a graph and observe its homological properties.
 Figure () demonstrates a simplicial complex with one hole surrounded by the simplices () () (), and a void surrounded by the simplices () () () ().
