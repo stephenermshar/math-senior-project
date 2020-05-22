@@ -100,6 +100,28 @@ Figure \ref{fig:example-cech} demonstrates a simplicial complex with one hole su
 
 \subsection{Computations}
 
+\begin{definition}
+    The \textbf{Boundary Homomorphism} \(\partial_n : C_n \to C_{n-1}\) maps elements from the group of \(n\)-simplicies to elements in the group of \((n-1)\)-simplicies and is defined by
+    \[
+        \partial_n (v_0,\dots , v_{n}) = \sum_{i=0}^n (-1)^{i}
+        (v_0,\dots, \widehat{v_i}, \dots, v_n)
+    \]
+    \cite{hatcher}
+\end{definition}
+
+\begin{theorem}\label{thm:homology-composition}
+	\begin{align*}
+		\boundary ^2 = 0
+	\end{align*}
+\end{theorem}
+
+\begin{definition}
+    The \textbf{n-th Homology Group} is \[H_n = \bigslant{\Ker(\partial_n)}{\Ima(\partial_{n+1})}\]
+    \cite{fraleigha}
+\end{definition}
+
+\textit{\cite{cohen-steiner} discusses the stability theorem in persistent homology, which would be relevant to this paper. I've seen the theorem before in other papers and understand it to mean that small changes in the data set result in small changes to the homology. I'm having a hard time explaining why this would be useful, but it's supposed to increase confidence in the results of persistent homology. It would also give the paper a more relevant theorem than theorem \ref{thm:homology-composition}.}
+
 \section{Persistent Homology}\label{sec:persistent-homology}
 
 \subsection{Persistence Barcodes}
