@@ -23,7 +23,7 @@
 Persistent homology is a tool for understanding the shape of a data set.
 For instance, if a data set is a collection of points in two dimensional space, then it can be graphed in a plane.
 We can easily look at the graph and see whether the data clumps together in certain places, or if it forms more interesting shapes, like a loop.
-We can graph data in one and three dimensions as well, but with dimensions four and higher we're no longer able to intuitively and visually observe the data directly.
+We can graph data in one and three dimensions as well, but with dimensions four and higher we're no longer able to visualize the data in a traditional scatter plot.
 
 In section \ref{sec:homology} we'll explore Homology, which gives us tools to understand structures analogous to holes in a shape, regardless of the dimension in which the shape is embedded.
 When we use Persistent Homology, we'll be converting our data into a form where we can apply tools from homology to understand it.
@@ -71,14 +71,10 @@ There are many ways of constructing simplicial complexes from data, but we'll fo
 		\cite{wagner}
 \end{definition}
 
-% should I explain the cech complex or expect the reader to labor over the definition if they're confused?
-
 The radius \(r\) used in the \v{C}ech Complex is the scale parameter that we'll vary when looking for persistence. One can observe that the \v{C}ech Complex fits the definition of a simplicial complex.
-% <!-- Since if balls around points in the set intersect at one scale parameter, then they certainly will when the scale parameter increases. -->
 Since if the balls around some points intersect, then the balls around any subset of those points must also intersect.
 
-Given a simplicial complex we can draw it as a graph and observe its homological properties.
-Figure \ref{fig:example-cech} demonstrates a simplicial complex with one hole surrounded by the simplices \((2,3)\), \((3,4)\), and \((2,4)\).
+In figure \ref{fig:example-cech} we start with the points labeled \(1\), \(2\), \(3\), and \(4\). We choose a value for \(r\) and construct a cech complex \(C = \{ (1,2,3), (1,2), (1,3), (2,3), (2,4), (3,4), (1), (2), (3), (4) \}\). With this complex we can fill in the remaining triangle and edges in the graph based on the simplices included in the complex. We can visually observe that this complex has one hole surrounded by \(1\)-simplices \((2,3)\), \((3,4)\), and \((2,4)\).
 
 \begin{figure}
     \centering
@@ -100,6 +96,12 @@ Figure \ref{fig:example-cech} demonstrates a simplicial complex with one hole su
 
 \subsection{Computations}
 
+When computing homology, our goal is to identify paths made up of simplices surrounding holes. To do that We'll find all cycles made up of \(n\)-simplices and rule those that are boundaries of \(n+1\)-simplices. This leaves cycles which are boundaries for \(n+1\)-simplices not in the complex.
+
+The boundary of an \(n\)-simplex will be represented by a linear combination of \((n-1)\)-simplices. For instance, in figure \ref{fig:basic-simplices} the boundary of the \(1\)-simplex is \((2)-(1)\). The boundary of the \(2\)-simplex will include the \(1\)-simplices \((1,2)\), \((2,3)\), and \((3,1)\), which we get by selecting the edges in counterclockwise order. Since we list the vertices in increasing order \((3,1)\) will have a negative sign in the linear combination for the boundary. The boundary for the \(2\)-simplex is \((1,2) + (2,3) - (1,3)\).
+
+The Boundary Homomorphism generalizes this.
+
 \begin{definition}
     The \textbf{Boundary Homomorphism} \(\boundary_n : C_n \to C_{n-1}\) maps elements from the group of \(n\)-simplicies to elements in the group of \((n-1)\)-simplicies and is defined by
     \[
@@ -110,8 +112,9 @@ Figure \ref{fig:example-cech} demonstrates a simplicial complex with one hole su
 \end{definition}
 
 \begin{theorem}\label{thm:homology-composition}
-	\begin{align*}
-		\boundary ^2 = 0
+    The composition of two boundary homomorphisms is zero.
+    \begin{align*}
+		\boundary_n \boundary_{n-1} = 0
 	\end{align*}
 \end{theorem}
 
@@ -148,7 +151,7 @@ In definition \ref{def:nth-homology-group}, \(\Ker(\boundary_n)\) can be thought
 
 \section{Applications}\label{sec:applications}
 
-\newpage
+% \newpage
 
 \bibliographystyle{alpha}
 \bibliography{../math496-7-zotero.bib}
