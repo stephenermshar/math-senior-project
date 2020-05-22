@@ -78,10 +78,22 @@ The radius \(r\) used in the \v{C}ech Complex is the scale parameter that we'll 
 Since if the balls around some points intersect, then the balls around any subset of those points must also intersect.
 
 Given a simplicial complex we can draw it as a graph and observe its homological properties.
-Figure \ref{fig:example-cech} demonstrates a simplicial complex with one hole surrounded by the simplices \((2,3), (3,4), (2,4)\).
+Figure \ref{fig:example-cech} demonstrates a simplicial complex with one hole surrounded by the simplices \((2,3)\), \((3,4)\), and \((2,4)\).
 
 \begin{figure}
-    \input{./tikz/example-cech.tex}
+    \centering
+    \begin{minipage}{.5\textwidth}
+        \centering
+        \input{./tikz/example-cech.tex}
+    \end{minipage}%
+    \begin{minipage}{.5\textwidth}
+        \begin{align*}
+            C_1 &= \langle (1,2),(1,3),(2,3),(2,4),(3,4) \rangle \\
+            C_2 &= \langle (1,2,3) \rangle \\
+            \ell_1 &= (2,3) - (1,3) + (1,2) \\
+            \ell_0 &= (1,3) + (3,4) - (2,4) - (1,2)
+        \end{align*}
+    \end{minipage}
     \caption{}
     \label{fig:example-cech}
 \end{figure}
