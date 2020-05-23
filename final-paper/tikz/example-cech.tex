@@ -47,6 +47,10 @@ pattern radius = 1pt}
             \p circle[radius=\radius];
 }
 
+% TRIANGLE
+
+\draw [black, fill=lightgray] (1) -- (2) -- (3) -- cycle ;
+
 % VERTICES
 
 \foreach \p [count=\pi] in \points{
@@ -60,10 +64,6 @@ pattern radius = 1pt}
 \draw (2)--(3) ;
 \draw (2)--(4) ;
 \draw (3)--(4) ;
-
-% TRIANGLE
-
-\draw [pattern=_iy1rqtf17,pattern size=6pt,pattern thickness=0.75pt,pattern radius=0pt, pattern color={rgb, 255:red, 0; green, 0; blue, 0}] (1) -- (2) -- (3) -- cycle ;
 
 % LABELS
 
