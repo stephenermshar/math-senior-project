@@ -3,9 +3,13 @@
 \title[Persistent Homology]{Persistent Homology: Computations and Applications}
 \author{Stephen Ermshar}
 \address{Department of Mathematics, Walla Walla University, College Place, WA 99324}
+\date{\DTMDisplaydate{2020}{5}{29}{}} % pre-final draft due
 \thanks{Advisor: Dr. John Foster}
 
-\date{\DTMDisplaydate{2020}{5}{22}{}} % advisor critique due
+% for keeping track of printed drafts, adds date and time to every page
+\thanks{\tiny{\DTMtoday, \DTMcurrenttime}}
+\rfoot{\hfill\newline\tiny{\DTMtoday, \DTMcurrenttime}}
+
 
 \begin{document}
 
@@ -20,21 +24,34 @@
 
 \section{Introduction}
 
+
 Persistent homology is a tool for understanding the shape of a data set.
-For instance, if a data set is a collection of points in two dimensional space, then it can be graphed in a plane.
-We can easily look at the graph and see whether the data clumps together in certain places, or if it forms more interesting shapes, like a loop.
-We can graph data in one and three dimensions as well, but with dimensions four and higher we're no longer able to visualize the data in a traditional scatter plot.
+If a data set is a collection of points in two dimensional space, then it can be graphed in a plane.
+We can easily look at the graph and see whether the data clumps together in certain places, or if it forms more interesting shapes, like loops.
+We can graph data from one and three dimensions as well, but with dimensions four and higher we are no longer able to visualize the data in a traditional scatter plot.
 
-In section \ref{sec:homology} we'll explore Homology, which gives us tools to understand structures analogous to holes in a shape, regardless of the dimension in which the shape is embedded.
-When we use Persistent Homology, we'll be converting our data into a form where we can apply tools from homology to understand it.
-There are a variety of ways to convert data into a form where homology can be applied, most of which, including the one we'll explore in section \ref{sec:cech-complex}, rely on the choice of a scale parameter.
-This scale parameter is used to determine whether points in the data set are related to each other based on the distance between them.
-We'll want to understand the structure of the data at multiple scales, so we'll look at its homology along a range of scale parameters.
-If a structure revealed by homology persists on a wide range of scales then we can feel more confident that this structure is a good approximation for the shape of the data.
-In section \ref{sec:persistent-homology} we'll look at different ways of visualizing a data set's homological structure along a range of scales.
+\begin{figure}[h]
+    \centering
+    \scalebox{0.75}{\input{tikz/persistence-demo.tex}}
+    \caption{}
+    \label{fig:persistence-demo-r25}
+\end{figure}
 
-Persistent Homology has been used in a wide variety of fields as a data analysis tool, and has some potential applications outside of data analysis as well.
-In section \ref{sec:applications} we'll look at some of these uses, and potentially provide a simple demonstration of an insight that can be gathered using persistent homology.
+To get an idea of the shape formed by a data set we connect nearby points, using a threshold radius to determine whether points are close enough to be considered related.
+With the resulting graph-like structure we can apply tools from homology to find holes like the two shown in figure \ref{fig:persistence-demo-r25}.
+Homology will help us find higher dimensional analogues of these holes as well, such as voids, which are the space inside an enclosed surface.
+
+The graph-like structure, which is called a simplicial complex, will change depending on the value of the radius.
+If the radius is small enough then no points will be connected, and if it is large enough then all the points will be connected.
+As the radius varies between these two extremes more interesting simplicial complexes result.
+If the radius is increased holes will form as points begin to connect, and eventually as more points connect those holes will get filled in.
+The holes that persist over a wide range of radius values are considered to be the more significant features of the shape.
+
+In section \ref{sec:homology} we'll formalize the simplicial complex and its building blocks.
+Then, given an existing simplicial complex we'll solidify the concept with an example computation for finding a hole.
+As we move on to persistent homology in section \ref{sec:persistent-homology} we'll introduce the cech complex, which is used to build a simplicial complex given a data set and a radius.
+Having calculated the homology for the cech complex along a range of scales we'll look at two methods for visualizing the results, and \red{might} look at the stability theorem, which will ensure that the results are reliable.
+Finally, in section \ref{sec:applications} we \red{might} explore applications for persistent homology.
 
 \section{Homology}\label{sec:homology}
 
@@ -57,19 +74,6 @@ A simplicial complex has the additional requirement that every subset of every s
     \caption{}
     \label{fig:basic-simplices}
 \end{figure}
-
-\subsection{The Cech Complex}\label{sec:cech-complex}
-
-There are many ways of constructing simplicial complexes from data, but we'll focus on one of the more intuitive and original methods used, the cech complex.
-
-\begin{definition}\label{def:cech-complex}
-    Given a set of points \(P\), and a distance \(r\), let \(B_x(r)\) be the ball with radius \(r\) around the point \(x\). The \textbf{\v{C}ech Complex} is given by
-		\begin{align*}
-            \textrm{\v{C}ech}(r) := \{ S \subseteq P | \bigcap_{x\in S} B_x(r) \neq \emptyset \}
-            .
-		\end{align*}
-		\cite{wagner}
-\end{definition}
 
 The radius \(r\) used in the \v{C}ech Complex is the scale parameter that we'll vary when looking for persistence. One can observe that the \v{C}ech Complex fits the definition of a simplicial complex.
 Since if the balls around some points intersect, then the balls around any subset of those points must also intersect.
@@ -139,11 +143,51 @@ In definition \ref{def:nth-homology-group}, \(\Ker(\boundary_n)\) can be thought
 
     \(\Ker(\boundary_1)\) can be found by first representing \(C_1\) as a linear combination of its elements.
 
+    \[s = a(1,2) + b(1,3) + c(2,3) + d(2,4) + e(3,4) \in C_1\]
+
+    Since the kernel is all of the elements of the domain which map to zero, our goal is to find all values of a,b,c,d, and e, such that \(\boundary(s) = 0\).
+
+    By applying the boundary homomorphism to an arbitrary element \(s\) in \(C_1\) and setting it equal to zero, we get
+
+    \[\boundary(a(1,2) + b(1,3) + c(2,3) + d(2,4) + e(3,4)) = a(2) - a(1) + b(3) - b(1) + c(3) - c(2) + d(4) - d(2) + e(4) - e(3) = (-a - b)(1) + (a - c - d)(2) + (b + c - e)(3) + (d + e)(4)\]
+
+    Solving for the values of \(a,b,c,d,e\) is equivalent to finding the null space of the matrix
+
+    \begin{align*}
+        \boundary_1(s) &=
+            \begin{bmatrix}
+                (1)\\(2)\\(3)\\(4)\\
+            \end{bmatrix}^T
+            \begin{bmatrix}
+                -1 & -1 &  0 &  0 &  0 \\
+                 1 &  0 & -1 & -1 &  0 \\
+                 0 &  1 &  1 &  0 & -1 \\
+                 0 &  0 &  0 &  1 &  1 \\
+            \end{bmatrix}
+            \begin{bmatrix}
+                a\\b\\c\\d\\e\\
+            \end{bmatrix}
+            = 0
+    \end{align*}
+
 \end{example}
 
 \textit{\cite{cohen-steiner} discusses the stability theorem in persistent homology, which would be relevant to this paper. I've seen the theorem before in other papers and understand it to mean that small changes in the data set result in small changes to the homology. I'm having a hard time explaining how this would be useful, but it's supposed to increase confidence in the results of persistent homology. It would also give the paper a more interesting theorem than theorem \ref{thm:homology-composition}. Though theorem \ref{thm:homology-composition} is relevant to understanding definition \ref{def:nth-homology-group} even if it isn't applied.}
 
 \section{Persistent Homology}\label{sec:persistent-homology}
+
+\subsection{The Cech Complex}\label{sec:cech-complex}
+
+There are many ways of constructing simplicial complexes from data, but we'll focus on one of the more intuitive and original methods used, the cech complex.
+
+\begin{definition}\label{def:cech-complex}
+    Given a set of points \(P\), and a distance \(r\), let \(B_x(r)\) be the ball with radius \(r\) around the point \(x\). The \textbf{\v{C}ech Complex} is given by
+		\begin{align*}
+            \textrm{\v{C}ech}(r) := \{ S \subseteq P | \bigcap_{x\in S} B_x(r) \neq \emptyset \}
+            .
+		\end{align*}
+		\cite{wagner}
+\end{definition}
 
 \subsection{Persistence Barcodes}
 

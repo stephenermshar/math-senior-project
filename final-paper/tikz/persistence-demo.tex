@@ -20,77 +20,72 @@ pattern radius = 1pt}
 }}
 \makeatother
 
-% https://ipfs-sec.stackexchange.cloudflare-ipfs.com/tex/A/question/6135.html
-\tikzset{every picture/.style={line width=0.75pt, opacity=0}} %set default line width to 0.75pt
-\tikzset{onslide/.code args={<#1>#2}{%
-    \only<#1>{\pgfkeysalso{#2}} % \pgfkeysalso doesn't change the path
-}}
+\tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt
 
-\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+\begin{tikzpicture}[x=1pt,y=1pt,yscale=-1,xscale=1]
 
     \def\points{
-        (111,164),
-        (166,136),
-        (126,298),
-        (182,312),
-        (114,222),
-        (232,342),
-        (332,236),
-        (325,312),
-        (280,342),
-        (484,284),
-        (418,342),
-        (388,184),
-        (292,126),
-        (322,172),
-        (234,108),
-        (246,154),
-        (162,192),
-        (454,224),
-        (362,348)
+        (111*.5,164*.5),
+        (166*.5,136*.5),
+        (126*.5,298*.5),
+        (182*.5,312*.5),
+        (114*.5,222*.5),
+        (232*.5,342*.5),
+        (332*.5,236*.5),
+        (325*.5,312*.5),
+        (280*.5,342*.5),
+        (484*.5,284*.5),
+        (418*.5,342*.5),
+        (388*.5,184*.5),
+        (292*.5,126*.5),
+        (322*.5,172*.5),
+        (234*.5,108*.5),
+        (246*.5,154*.5),
+        (162*.5,192*.5),
+        (454*.5,224*.5),
+        (362*.5,348*.5)
     }
 
-    % This will take a few minutes to run, and it's not efficiently written,
-    % though I don't really have time to investigate the mysteries of latex.
-    \foreach \r [count=\ri from 2] in {30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95}{
-        \foreach \p in \points{
-            \draw
-                [color={rgb, 255:red, 165; green, 232; blue, 255}]
-                [fill={rgb, 255:red, 165; green, 232; blue, 255}]
-                [onslide=<{\ri}>{opacity=1}]
-                [line width=0]
-                \p circle
-                [radius=\r];
-        }
+    \def\r{25}
 
+    \foreach \p in \points{
         \draw
-            [onslide=<{\ri}>{opacity=1}]
-            (100, 100) node {\(r = \r\)};
+            [color={rgb, 255:red, 165; green, 232; blue, 255}]
+            [fill= {rgb, 255:red, 165; green, 232; blue, 255}]
+            % [color={rgb, 255:red, 230; green, 230; blue, 230}]
+            % [fill= {rgb, 255:red, 230; green, 230; blue, 230}]
+            [line width=0]
+            \p circle
+            [radius=\r];
+    }
 
-        \foreach \a [count=\ai] in \points{
-            \foreach \b [count=\bi] in \points{
-                \path \a;
-                \pgfgetlastxy{\ax}{\ay}
-                \path \b;
-                \pgfgetlastxy{\bx}{\by}
-                % The adjustment to the radius on the following line,
-                % as opposed to using `2*\r`, is there because
-                % this calculation connected some vertices before the
-                % circles drawn underneath overlapped. the adjustment
-                % doesn't appear to make the graph incorrect and forces
-                % the vertices to wait longer before connecting, though
-                % it is concerning.
-                \pgfmathsetmacro\thresh{1.5*\r}
-                \pgfmathsetmacro\dist{veclen(\ax-\bx,\ay-\by)}
-                \ifnum\ai<\bi
-                    \ifdim\dist pt<\thresh pt
-                        \draw
-                        [onslide=<{\ri}>{opacity=1}]
-                        \a -- \b;
-                    \fi
+    % \draw (100, 100) node {\(r = \r\)};
+
+    \foreach \a [count=\ai] in \points{
+        \foreach \b [count=\bi] in \points{
+            \path \a;
+            \pgfgetlastxy{\ax}{\ay}
+            \path \b;
+            \pgfgetlastxy{\bx}{\by}
+            \pgfmathsetmacro\thresh{2*\r}
+            \pgfmathsetmacro\distab{veclen(\ax-\bx,\ay-\by)}
+            \ifnum\ai<\bi
+                \ifdim\distab pt<\thresh pt
+                    \draw \a -- \b;
+                    \foreach \c [count=\ci] in \points{
+                        \path \c;
+                        \pgfgetlastxy{\cx}{\cy}
+                        \pgfmathsetmacro\distac{veclen(\ax-\cx,\ay-\cy)}
+                        \pgfmathsetmacro\distbc{veclen(\cx-\bx,\cy-\by)}
+                        \ifdim\distac pt<\thresh pt
+                            \ifdim\distbc pt<\thresh pt
+                                % \draw [pattern=_iy1rqtf17,pattern size=6pt,pattern thickness=0.75pt,pattern radius=0pt, pattern color={rgb, 255:red, 50; green, 50; blue, 50}] \a -- \b -- \c -- cycle ;
+                                \draw [fill=lightgray] \a -- \b -- \c -- cycle ;
+                            \fi
+                        \fi
+                    }
                 \fi
-
-            }
+            \fi
         }
     }
 
@@ -98,16 +93,11 @@ pattern radius = 1pt}
     \foreach \p [count=\pi] in \points{
         \draw
             [black, fill=black]
-            [opacity=1]
             \p circle
             [radius= 3.35];
         % \draw % mark nodes for debugging
         %     [opacity=1]
         %     \p+(10,10) node {\(\p\)};
     }
-
-    \draw
-    [onslide=<1>{opacity=1}]
-    (100, 100) node {\(r = 0\)};
 
 \end{tikzpicture}
