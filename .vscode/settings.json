@@ -20,7 +20,6 @@
         "minipage",
         "minipages",
         "rqtf",
-        "simplicies"
     ],
     "files.exclude": {
         "**/.git": true,
@@ -43,7 +42,7 @@
         "**/*.bbl": true,
         "**/*.blg": true,
     },
-    "workbench.colorTheme": "Solarized Light",
+    "workbench.colorTheme": "Default Light+",
     "latex-utilities.countWord.path": "/Users/stephen/Library/TinyTeX/texmf-dist/scripts/texcount/texcount.pl",
     "latex-workshop.view.pdf.trim": 2
 }
