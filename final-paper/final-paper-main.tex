@@ -57,6 +57,20 @@ Finally, in section \ref{sec:applications} we \red{might} explore applications f
 
 \subsection{Simplicial Homology}\label{sec:simplicial-homology}
 
+The basic building block of a simplicial complex is an \(n\)-simplex.
+An \(n\)-simplex generalizes the triangle to \(n\) dimensions by associating \(n+1\) vertices with each other in an ordered \(n\)-tuple.
+For instance, a point is a 0-simplex, an edge a 1-simplex, a triangle a 2-simplex, a tetrahedron a 3-simplex, and so on \figref{fig:basic-simplices}.
+
+A simplicial complex will be a collection of simplices.
+For a simplex to be considered part of a simplicial complex it will need to have been built up from lower dimensional simplices.
+A triangle includes its three edges and three vertices, so if a triangle is included in a simplicial complex we will require that all of its edges and vertices are also included in the complex.
+
+\begin{definition}\label{def:simplicial-complex}
+    A \textbf{Simplicial Complex} is a finite collection of finite sets such that every subset of every element in the collection is also an element in the collection. \cite{wagner}
+\end{definition}
+
+This will be a useful property because when we study the homology of the complex we will be comparing the boundaries of its \(n\)-simplices, which are \((n-1)\)-simplices, to all the other \((n-1)\)-simplices in the complex.
+
 To calculate homology on our data we'll first need to convert it into a simplicial complex.
 A Simplicial complex is just a collection of sets of points from our dataset. Each of these sets of \(n+1\) points is called an \(n\)-simplex \figref{fig:basic-simplices}.
 To keep track of signs later on, we'll give each simplex an orientation which will be denoted by the order in which its points are listed.
