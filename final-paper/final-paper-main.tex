@@ -80,12 +80,18 @@ This will be a useful property because when we study the homology of the complex
 Homology will be calculated by finding all the loops of \((n-1)\)-simplices, and ignoring any loops of \((n-1)\)-simplices around \(n\)-simplices, leaving only loops of \((n-1)\)-simplices that surround empty space that could be filled with \(n\)-simplices.
 These remaining loops are what we intuitively call holes.
 
+A loop or path of \(n\)-simplices can just be thought of as an ordered list of oriented \(n\)-simplices; this makes intuitive sense for 1-simplices, but still works for larger values of \(n\).
+A closed path of 2-simplices around a tetrahedron consists of its four faces.
+
 \subsection{Computations}
 
 In practice we can think of paths of \(n\)-simplices as linear combinations of \(n\)-simplices.
 Given the complex \(C = \{ (1,2,3), (1,2), (1,3), (2,3), (2,4), (3,4), (1), (2), (3), (4) \}\) shown in figure \ref{fig:example-cech}, simplices can be added together to represent a path.
 For example, \(\ell_1\) is the closed path of 1-simplices around the outside of the complex and \(\ell_2\) is the closed path of 1-simplices around the 2-simplex \((1,2,3)\).
 Note that the negative signs in \(\ell_1\) and \(\ell_2\) correspond to traveling backwards along an edge.
+When we write down a simplex we always write its elements in increasing order by label.
+This convention allows each simplex to have an orientation, so that when we add a simplex to a copy of itself with an opposite orientation they will cancel out.
+If we were to add \(\ell_1\) and \(\ell_2\), the simplices \((1, 3)\) and \((1, 2)\) would cancel out, leaving the element \((3, 4) - (2, 4) + (2, 3)\), which corresponds to the loop around the hole.
 
 \begin{figure}
     \centering
