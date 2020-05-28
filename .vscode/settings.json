@@ -20,6 +20,7 @@
         "minipage",
         "minipages",
         "rqtf",
+        "textsuperscript"
     ],
     "files.exclude": {
         "**/.git": true,
