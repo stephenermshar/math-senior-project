@@ -15,10 +15,12 @@
         "Beamer",
         "Cech",
         "Simplicial",
+        "abelian",
         "filtrations",
         "ifundefined",
         "minipage",
         "minipages",
+        "parameterizing",
         "rqtf",
         "textsuperscript"
     ],

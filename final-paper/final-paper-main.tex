@@ -24,7 +24,6 @@
 
 \section{Introduction}
 
-
 Persistent homology is a tool for understanding the shape of a data set.
 If a data set is a collection of points in two dimensional space, then it can be graphed in a plane.
 We can easily look at the graph and see whether the data clumps together in certain places, or if it forms more interesting shapes, like loops.
@@ -104,7 +103,7 @@ A closed path of \((n-1)\)-simplices around an \(n\)-simplex will represent the 
     \cite{hatcher}
 \end{definition}
 
-\textit{Is there a nice way to explain the alternating sign in def \ref{def:boundary-homomorphism}?}
+\red{(Is there a nice way to explain the alternating sign in def \ref{def:boundary-homomorphism}?)}
 
 \begin{example}
     If the example complex in figure \ref{fig:example-cech} were to include the triangle \((2,3,4)\), then we could combine the two triangles and would expect the their boundary to be the loop around the outside of the complex, \(\ell_1\). The triangle \((2,3,4)\) has clockwise orientation, while \((1,2,3)\) has counterclockwise orientation. If we were to give them both the same orientation and then add them, then the simplex \((2,3)\) in their boundaries would cancel, resulting in \(\ell_1\) as expected.
@@ -113,46 +112,115 @@ A closed path of \((n-1)\)-simplices around an \(n\)-simplex will represent the 
 The boundary homomorphism will help us find all boundaries of \(n\)-simplices in a complex. With the help of theorem \ref{thm:zero-boundary} we'll also be able to find all closed paths of \(n\)-simplices in a complex.
 
 \begin{theorem}\label{thm:zero-boundary}
-    The composition of two boundary homomorphisms is zero. For any element \(c\) in the group of \(n\)-simplices
+    The composition of two boundary homomorphisms is zero. For any element \(c\) in the group of \((n+1)\)-simplices
     \begin{align*}
 		\boundary_{n} \Big( \boundary_{n+1} (c) \Big) = 0
 	\end{align*}
 \end{theorem}
 
-The boundary of a boundary is always zero, which directly implies that the kernel of a boundary homomorphism
+The boundary of a boundary is always zero; Any element from the group of \(n\)-simplices that is a boundary is in the kernel of the \(n\textsuperscript{th}\) boundary homomorphism, that is, \(\Ima(\boundary_{n+1} \subseteq \Ker(\boundary_n))\). The kernel of a boundary homomorphism will represent all closed paths in a complex \red{(It'd be nice to have a good explanation of this sentence.)}.
+
+Since we're not concerned with the order in which simplices are added, the groups of simplices are abelian, so the following factor group is defined.
+
+\begin{definition}\label{def:nth-homology-group}
+    The \textbf{n-th Homology Group} is \[H_n = \bigslant{\Ker(\boundary_n)}{\Ima(\boundary_{n+1})}\]
+    \cite{fraleigha}
+\end{definition}
+
+This is the group of closed paths, or cycles, modded out by those cycles around simplices. The result is just the cycles not surrounding simplices. We will demonstrate this computation to find the first homology group of the complex shown in figure \ref{fig:example-cech}.
+
+\begin{example}
+
+    \begin{figure}
+        \centering
+        \begin{minipage}{.5\textwidth}
+            \centering
+            \input{./tikz/example-cech.tex}
+        \end{minipage}%
+        \begin{minipage}{.5\textwidth}
+            \begin{align*}
+                C_1 &= \langle (1,2),(1,3),(2,3),(2,4),(3,4) \rangle \\
+                C_2 &= \langle (1,2,3) \rangle \\
+                \ell_1 &= (1,3) + (3,4) - (2,4) - (1,2)\\
+                \ell_2 &= (2,3) - (1,3) + (1,2)
+            \end{align*}
+        \end{minipage}
+        \caption{}
+        \label{fig:example-cech}
+    \end{figure}
+
+    In figure \ref{fig:example-cech}, \(C_1\) and \(C_2\) are the groups of 1-simplices and 2-simplices respectively for the shown complex.
+    To find the first homology group we need to calculate \(\Ker(\boundary_1)\) and \(\Ima(\boundary_2)\).
+    The kernel of \(\boundary_1\) is all of the elements \(c \in C_1\) such that \(\boundary_1(c) = 0\). We can represent an arbitrary element of \(C_1\) as a linear combination of 1-simplices with integer coefficients, apply \(\boundary_1\) to it and then solve for the null space of those coefficients.
+
+    \begin{align}
+        \boundary_1(C_1) &= \boundary_1\Big( a(1,2) + b(1,3) + c(2,3) + d(2,4) + e(3,4) \Big) \\
+        &= a(2) - a(1) + b(3) - b(1) + c(3) - c(2) + d(4) - d(2) + e(4) - e(3)\\
+        &= (-a - b)(1) + (a - c - d)(2) + (b + c - e)(3) + (d + e)(4) \\
+        &=  \begin{bmatrix}
+                (1)\\(2)\\(3)\\(4)\\
+            \end{bmatrix}^T
+            \begin{bmatrix}
+                -1 & -1 &  0 &  0 &  0 \\
+                1 &  0 & -1 & -1 &  0 \\
+                0 &  1 &  1 &  0 & -1 \\
+                0 &  0 &  0 &  1 &  1 \\
+            \end{bmatrix}
+            \begin{bmatrix}
+                a\\b\\c\\d\\e\\
+            \end{bmatrix}
+        = 0 \label{eq:kernel-matrix}
+    \end{align}
+
+    The null space of the matrix in \eqref{eq:kernel-matrix} is the space of all coefficients on elements of \(C_1\) such that those elements map to 0 \red{(It seems like it would be cleaner to leave out the matrix and just show the results of solving the equation.)}.
+
+    Thus,
+    \begin{align}
+        Ker(\boundary_1) &= (c - e)(1) + (-c + e)(2) + (c)(3) + (-e)(4) + (e)(5)\\
+            &= (c)\Big( (1,2) + (2,3) - (1,3)\Big) + (e)\Big((1,3) + (3,4) - (2,4) - (1,2)\Big) \\
+            &= \langle \ell_1, \ell_2 \rangle
+    \end{align}
+
+    The image of \(\boundary_2\) can be found similarly, by parameterizing \(C_2\) and applying the boundary homomorphism.
+
+    \begin{align}
+        \Ima (\partial_2)   &= \partial_2 (C_2) \\
+            &= \partial_2 \Big( a(1,2,3) \Big) \\
+            &= a\Big((2,3) - (1,3) + (1,2) \Big)\\
+            &= \langle \ell_2 \rangle
+    \end{align}
+\end{example}
+
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+% \textit{This paragraph started to ramble, but might be useful:}
+% Another way to think about the orientation of a simplex is to consider the fact that an \(n\)-simplex is a convex hull of \(n+1\) vertices, which means that it must have an inside and an outside and has an orientation.
+% If two \(n\)-simplices share a common \((n-1)\)-simplex then this \((n-1)\)-simplex will have an opposite orientation on each \(n\)-simplex.
+% If the two \(n\)-simplices are added together then the boundary of the resulting shape will not include the shared \((n-1)\)-simplex.
+% And, if the shared \((n-1)\)-simplices from each \(n\)-simplex are added together, then they will cancel each other out because of their opposite orientation.
+% So the boundary map from the group of linear combinations of \(n\)-simplices to the group of linear combinations of \((n-1)\)-simplices preserves addition.
+% It is a homomorphism because applying it to the \(n\)-simplices individually before adding them together produces the same result as adding the \(n\)-simplices together and finding their boundary.
 
-
-
-In figure \ref{fig:example-cech}, \(C_1\) and \(C_2\) the groups of 1-simplices and 2-simplices respectively for the shown complex.
-
-\textit{This paragraph started to ramble, but might be useful:}
-Another way to think about the orientation of a simplex is to consider the fact that an \(n\)-simplex is a convex hull of \(n+1\) vertices, which means that it must have an inside and an outside and has an orientation.
-If two \(n\)-simplices share a common \((n-1)\)-simplex then this \((n-1)\)-simplex will have an opposite orientation on each \(n\)-simplex.
-If the two \(n\)-simplices are added together then the boundary of the resulting shape will not include the shared \((n-1)\)-simplex.
-And, if the shared \((n-1)\)-simplices from each \(n\)-simplex are added together, then they will cancel each other out because of their opposite orientation.
-So the boundary map from the group of linear combinations of \(n\)-simplices to the group of linear combinations of \((n-1)\)-simplices preserves addition.
-It is a homomorphism because applying it to the \(n\)-simplices individually before adding them together produces the same result as adding the \(n\)-simplices together and finding their boundary.
-
-\begin{figure}
-    \centering
-    \begin{minipage}{.5\textwidth}
-        \centering
-        \input{./tikz/example-cech.tex}
-    \end{minipage}%
-    \begin{minipage}{.5\textwidth}
-        \begin{align*}
-            C_1 &= \langle (1,2),(1,3),(2,3),(2,4),(3,4) \rangle \\
-            C_2 &= \langle (1,2,3) \rangle \\
-            \ell_1 &= (1,3) + (3,4) - (2,4) - (1,2)\\
-            \ell_2 &= (2,3) - (1,3) + (1,2)
-        \end{align*}
-    \end{minipage}
-    \caption{}
-    \label{fig:example-cech}
-\end{figure}
+% \begin{figure}
+%     \centering
+%     \begin{minipage}{.5\textwidth}
+%         \centering
+%         \input{./tikz/example-cech.tex}
+%     \end{minipage}%
+%     \begin{minipage}{.5\textwidth}
+%         \begin{align*}
+%             C_1 &= \langle (1,2),(1,3),(2,3),(2,4),(3,4) \rangle \\
+%             C_2 &= \langle (1,2,3) \rangle \\
+%             \ell_1 &= (1,3) + (3,4) - (2,4) - (1,2)\\
+%             \ell_2 &= (2,3) - (1,3) + (1,2)
+%         \end{align*}
+%     \end{minipage}
+%     \caption{}
+%     \label{fig:example-cech}
+% \end{figure}
 
 
 
