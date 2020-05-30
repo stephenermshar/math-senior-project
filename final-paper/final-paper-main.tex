@@ -36,19 +36,21 @@ We can graph data from one and three dimensions as well, but with dimensions fou
     \label{fig:persistence-demo-r25}
 \end{figure}
 
-To get an idea of the shape formed by a data set we connect nearby points, using a threshold radius to determine whether points are close enough to be considered related.
+To get an idea of the shape formed by a data set we connect nearby points.
+A threshold radius can be used to determine whether points are close enough to be considered related.
 With the resulting graph-like structure we can apply tools from homology to find holes like the two shown in figure \ref{fig:persistence-demo-r25}.
-Homology will help us find higher dimensional analogues of these holes as well, such as voids, which are the space inside an enclosed surface.
+Homology will help us find higher dimensional analogues of these holes as well, such as voids, which are the space inside an enclosed surface \red{(cite?)}.
 
 The graph-like structure, which is called a simplicial complex, will change depending on the value of the radius.
 If the radius is small enough then no points will be connected, and if it is large enough then all the points will be connected.
-As the radius varies between these two extremes more interesting simplicial complexes result.
-If the radius is increased holes will form as points begin to connect, and eventually as more points connect those holes will get filled in.
+Between these two extremes more interesting simplicial complexes result.
+As the radius increases, holes will form and points begin to connect.
+Eventually as more points connect those holes will get filled in.
 The holes that persist over a wide range of radius values are considered to be the more significant features of the shape.
 
 In section \ref{sec:homology} we'll formalize the simplicial complex and its building blocks.
 Then, given an existing simplicial complex we'll solidify the concept with an example computation for finding a hole.
-As we move on to persistent homology in section \ref{sec:persistent-homology} we'll introduce the cech complex, which is used to build a simplicial complex given a data set and a radius.
+As we move on to persistent homology in section \ref{sec:persistent-homology}, we'll introduce the cech complex, which is used to build a simplicial complex given a data set and a radius.
 Having calculated the homology for the cech complex along a range of scales we'll look at two methods for visualizing the results, and \red{might} look at the stability theorem, which will ensure that the results are reliable.
 Finally, in section \ref{sec:applications} we \red{might} explore applications for persistent homology.
 
@@ -79,16 +81,16 @@ This will be a useful property because when we study the homology of the complex
 Homology will be calculated by finding all the loops of \((n-1)\)-simplices, and ignoring any loops of \((n-1)\)-simplices around \(n\)-simplices, leaving only loops of \((n-1)\)-simplices that surround empty space that could be filled with \(n\)-simplices.
 These remaining loops are what we intuitively call holes.
 
-A path of \(n\)-simplices can just be thought of as a list of \(n\)-simplices; this makes intuitive sense for 1-simplices, where an list of edges describes a 1-dimensional through a complex, but still works for larger values of \(n\).
+A path of \(n\)-simplices can just be thought of as a list of \(n\)-simplices; this makes intuitive sense for 1-simplices, where a list of edges describes a 1-dimensional path through a complex, but still works for larger values of \(n\).
 For instance, a closed path of 2-simplices around a tetrahedron consists of its four faces.
 
 \subsection{Computations}
 
 In practice we can think of paths of \(n\)-simplices as linear combinations of \(n\)-simplices.
-Given the complex \(C = \{ (1,2,3), (1,2), (1,3), (2,3), (2,4), (3,4), (1), (2), (3), (4) \}\) shown in figure \ref{fig:example-cech}, \(\ell_1\) is the closed path of 1-simplices around the outside of the complex and \(\ell_2\) is the closed path of 1-simplices around the 2-simplex \((1,2,3)\).
+Figure \ref{fig:example-cech} shows a complex \(C = \{ (1,2,3), (1,2), (1,3), (2,3), (2,4), (3,4), (1), (2), (3), (4) \}\) where \(\ell_1\) is the closed path of 1-simplices around the outside of the complex and \(\ell_2\) is the closed path of 1-simplices around the 2-simplex \((1,2,3)\).
 When we write down a simplex we always write its elements in increasing order by label.
 Note that the negative signs in \(\ell_1\) and \(\ell_2\) correspond to traveling backwards along an edge.
-This convention allows us to give each simplex to an orientation, so that when we add a simplex to a copy of itself with an opposite orientation they will cancel out.
+This convention allows us to give each simplex an orientation, so that when we add a simplex to a copy of itself with an opposite orientation they will cancel out.
 If we were to add \(\ell_1\) and \(\ell_2\), the simplices \((1, 3)\) and \((1, 2)\) would cancel out, leaving the element \((3, 4) - (2, 4) + (2, 3)\), which corresponds to the loop around the hole.
 
 A closed path of \((n-1)\)-simplices around an \(n\)-simplex will represent the boundary of the \(n\)-simplex. We can also add \(n\)-simplices together and take the boundary of the resulting element. To more formally describe boundaries of \(n\)-simplices we define the boundary homomorphism, which maps elements from the group of \(n\)-simplices to elements in the group of \((n-1)\)-simplices.
@@ -106,7 +108,7 @@ A closed path of \((n-1)\)-simplices around an \(n\)-simplex will represent the 
 \red{(Is there a nice way to explain the alternating sign in def \ref{def:boundary-homomorphism}?)}
 
 \begin{example}
-    If the example complex in figure \ref{fig:example-cech} were to include the triangle \((2,3,4)\), then we could combine the two triangles and would expect the their boundary to be the loop around the outside of the complex, \(\ell_1\). The triangle \((2,3,4)\) has clockwise orientation, while \((1,2,3)\) has counterclockwise orientation. If we were to give them both the same orientation and then add them, then the simplex \((2,3)\) in their boundaries would cancel, resulting in \(\ell_1\) as expected.
+    If the example complex in figure \ref{fig:example-cech} were to include the triangle \((2,3,4)\), then we could combine the two triangles and would expect their boundary to be the loop around the outside of the complex, \(\ell_1\). The triangle \((2,3,4)\) has clockwise orientation, while \((1,2,3)\) has counterclockwise orientation. If we were to give them both the same orientation and then add them, then the simplex \((2,3)\) in their boundaries would cancel, resulting in \(\ell_1\) as expected.
 \end{example}
 
 The boundary homomorphism will help us find all boundaries of \(n\)-simplices in a complex. With the help of theorem \ref{thm:zero-boundary} we'll also be able to find all closed paths of \(n\)-simplices in a complex.
@@ -114,20 +116,28 @@ The boundary homomorphism will help us find all boundaries of \(n\)-simplices in
 \begin{theorem}\label{thm:zero-boundary}
     The composition of two boundary homomorphisms is zero. For any element \(c\) in the group of \((n+1)\)-simplices
     \begin{align*}
-		\boundary_{n} \Big( \boundary_{n+1} (c) \Big) = 0
-	\end{align*}
+        \boundary_{n} \Big( \boundary_{n+1} (c) \Big) = 0
+        .
+    \end{align*}
+    \red{(cite?)}
 \end{theorem}
 
-The boundary of a boundary is always zero; Any element from the group of \(n\)-simplices that is a boundary is in the kernel of the \(n\textsuperscript{th}\) boundary homomorphism, that is, \(\Ima(\boundary_{n+1} \subseteq \Ker(\boundary_n))\). The kernel of a boundary homomorphism will represent all closed paths in a complex \red{(It'd be nice to have a good explanation of this sentence.)}.
+The boundary of a boundary is always zero;
+Any element from the group of \(n\)-simplices that is a boundary is in the kernel of the \(n\textsuperscript{th}\) boundary homomorphism, that is, \(\Ima(\boundary_{n+1}) \subseteq \Ker(\boundary_n))\).
+The kernel of a boundary homomorphism will represent all closed paths in a complex \red{(It'd be nice to have a good explanation of this sentence.)}.
 
-Since we're not concerned with the order in which simplices are added, the groups of simplices are abelian, so the following factor group is defined.
+% replace this paragraph
+
+Since we're not concerned with the order in which simplices are added, the groups of simplices are abelian, so \(\Ima(\boundary_{n+1}) \normalsubgroup \Ker(\boundary_{n})  \).
+
+% replace with image is normal subgroup.
 
 \begin{definition}\label{def:nth-homology-group}
-    The \textbf{n-th Homology Group} is \[H_n = \bigslant{\Ker(\boundary_n)}{\Ima(\boundary_{n+1})}\]
+    The \textbf{n-th Homology Group} is \[H_n = \bigslant{\Ker(\boundary_n)}{\Ima(\boundary_{n+1})}.\]
     \cite{fraleigha}
 \end{definition}
 
-This is the group of closed paths, or cycles, modded out by those cycles around simplices. The result is just the cycles not surrounding simplices. We will demonstrate this computation to find the first homology group of the complex shown in figure \ref{fig:example-cech}.
+This is the group of closed paths, or cycles, modded out by cycles around simplices. The result is just the cycles not surrounding simplices. We will demonstrate this computation to find the first homology group of the complex shown in figure \ref{fig:example-cech}.
 
 \begin{example}
 
@@ -151,7 +161,7 @@ This is the group of closed paths, or cycles, modded out by those cycles around 
 
     In figure \ref{fig:example-cech}, \(C_1\) and \(C_2\) are the groups of 1-simplices and 2-simplices respectively for the shown complex.
     To find the first homology group we need to calculate \(\Ker(\boundary_1)\) and \(\Ima(\boundary_2)\).
-    The kernel of \(\boundary_1\) is all of the elements \(c \in C_1\) such that \(\boundary_1(c) = 0\). We can represent an arbitrary element of \(C_1\) as a linear combination of 1-simplices with integer coefficients, apply \(\boundary_1\) to it and then solve for the null space of those coefficients.
+    The kernel of \(\boundary_1\) is all of the elements \(c \in C_1\) such that \(\boundary_1(c) = 0\). We can represent an arbitrary element of \(C_1\) as a linear combination of 1-simplices with integer coefficients, apply \(\boundary_1\) to it, and then solve for the null space of those coefficients.
 
     \begin{align}
         \boundary_1(C_1) &= \boundary_1\Big( a(1,2) + b(1,3) + c(2,3) + d(2,4) + e(3,4) \Big) \\
@@ -172,7 +182,7 @@ This is the group of closed paths, or cycles, modded out by those cycles around 
         = 0 \label{eq:kernel-matrix}
     \end{align}
 
-    The null space of the matrix in \eqref{eq:kernel-matrix} is the space of all coefficients on elements of \(C_1\) such that those elements map to 0 \red{(It seems like it would be cleaner to leave out the matrix and just show the results of solving the equation.)}.
+    The null space of the matrix in equation \eqref{eq:kernel-matrix} is the space of all coefficients on elements of \(C_1\) such that those elements map to 0 \red{(It seems like it would be cleaner to leave out the matrix and just show the results of solving the equation.)}.
 
     Thus,
     \begin{align}
@@ -189,56 +199,27 @@ This is the group of closed paths, or cycles, modded out by those cycles around 
             &= a\Big((2,3) - (1,3) + (1,2) \Big)\\
             &= \langle \ell_2 \rangle
     \end{align}
+
+    We can now calculate the first homology group
+
+    \begin{align}
+        H_1 &= \bigslant{\Ker(\boundary_1)}{\Ima(\boundary_{2})}
+        = \bigslant{\langle \ell_1, \ell_2 \rangle}{\langle \ell_2 \rangle}
+        = \bigslant{\{ a\,\ell_1 + b\,\ell_2\ |\ a,b \in \Z \}}{\{ c\,\ell_2\ |\ c \in \Z \}} \\
+        &= \{ (a\,\ell_1 + b\,\ell_2) + \{ c\,\ell_2\ |\ c \in \Z \}\ |\ a,b \in \Z \} \\
+        &= \{ \{ a\,\ell_1 + b\,\ell_2 + c\,\ell_2\ |\ c \in \Z \}\ |\ a,b \in \Z \} \\
+        &= \{ \{ a\,\ell_1 + d\,\ell_2\ |\ d \in \Z \}\ |\ a \in \Z \} \\
+        &\simeq \Z \text{ \red{(?)}}
+    \end{align}
+
+    To interpret the homology group notice how the linear combinations of 1-simplices around \((1,2,3)\) are grouped together in sets, while each loop that surrounds the entire complex gets its own set. If we think of each of these sets as an equivalence class then we can interpret the homology group as the group of cycles that surround the hole, regardless of how many times they surround the filled in triangle. This group is isomorphic to \(\Z\), which corresponds to the idea that the cycles surrounding the hole can wrap around it any integer number of times. Each set in the first homology group represents one of those cycles. If there were two holes, then each hole could have cycles wrapped around it any integer number of times, and the first homology group would be isomorphic to \(\Z \oplus \Z\) \red{(I'm still conflicted as to whether I should write \(\Z \cross \Z\) or \(\Z \oplus \Z\))}.
+
+    A common interpretation of the first homology group compares it to rubber bands. If a rubber band is allowed to move anywhere within the complex, then it can wrap around holes, or it can be placed freely within higher dimensional simplices. If it surrounds a hole at any point and is allowed to ``snap'' into place it will tighten around the hole some integer number of times \red{(cite?)}.
 \end{example}
-
-
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% \textit{This paragraph started to ramble, but might be useful:}
-% Another way to think about the orientation of a simplex is to consider the fact that an \(n\)-simplex is a convex hull of \(n+1\) vertices, which means that it must have an inside and an outside and has an orientation.
-% If two \(n\)-simplices share a common \((n-1)\)-simplex then this \((n-1)\)-simplex will have an opposite orientation on each \(n\)-simplex.
-% If the two \(n\)-simplices are added together then the boundary of the resulting shape will not include the shared \((n-1)\)-simplex.
-% And, if the shared \((n-1)\)-simplices from each \(n\)-simplex are added together, then they will cancel each other out because of their opposite orientation.
-% So the boundary map from the group of linear combinations of \(n\)-simplices to the group of linear combinations of \((n-1)\)-simplices preserves addition.
-% It is a homomorphism because applying it to the \(n\)-simplices individually before adding them together produces the same result as adding the \(n\)-simplices together and finding their boundary.
-
-% \begin{figure}
-%     \centering
-%     \begin{minipage}{.5\textwidth}
-%         \centering
-%         \input{./tikz/example-cech.tex}
-%     \end{minipage}%
-%     \begin{minipage}{.5\textwidth}
-%         \begin{align*}
-%             C_1 &= \langle (1,2),(1,3),(2,3),(2,4),(3,4) \rangle \\
-%             C_2 &= \langle (1,2,3) \rangle \\
-%             \ell_1 &= (1,3) + (3,4) - (2,4) - (1,2)\\
-%             \ell_2 &= (2,3) - (1,3) + (1,2)
-%         \end{align*}
-%     \end{minipage}
-%     \caption{}
-%     \label{fig:example-cech}
-% \end{figure}
-
-
-
-
-% this section needs to be rewritten or removed, but I'm keeping it in the working directory for quick reference.
 \lightgray{
-
-% % this paragraph is partially redundant
-% This will allow us to describe holes easily.
-% An \(n\)-dimensional hole can be thought of as a space surrounded by \(n\)-simplices.
-% The loops from figure \ref{fig:persistence-demo-r25} are one dimensional holes; the empty space inside a closed surface, like the inside of a hollow tetrahedron, is a two-dimensional hole; the space between separate components of the complex is a zero dimensional hole.
-% The description of a zero dimensional hole is somewhat different from the others.
-% When we calculate the homology for a zero dimensional hole we will see the number of connected components, rather than the number of pairs of separate components between which there is empty space.
-
-% % this paragraph needs to be reworded, and is redundant
-% To keep track of signs later on, we'll give each simplex an orientation which will be denoted by the order in which its points are listed.
-% We'll arbitrarily choose to list the points in increasing order of the point's label.
-% The resulting simplicial complex will be a graph-like structure, where pairs of connected points are connected by a line, triples by a triangle, four points by a tetrahedron, and \(n\) points by the \(n\)-dimensional analog of a triangle.
 
 % % this paragraph needs to be removed, reworded, or moved to the persistence sec.
 % The radius \(r\) used in the \v{C}ech Complex is the scale parameter that we'll vary when looking for persistence. One can observe that the \v{C}ech Complex fits the definition of a simplicial complex.
@@ -246,100 +227,6 @@ This is the group of closed paths, or cycles, modded out by those cycles around 
 
 % % this paragraph needs to be moved to persistence sec. but the \(C\) part stays
 % In figure \ref{fig:example-cech} we start with the points labeled \(1\), \(2\), \(3\), and \(4\). We choose a value for \(r\) and construct a cech complex \(C = \{ (1,2,3), (1,2), (1,3), (2,3), (2,4), (3,4), (1), (2), (3), (4) \}\). With this complex we can fill in the remaining triangle and edges in the graph based on the simplices included in the complex. We can visually observe that this complex has one hole surrounded by \(1\)-simplices \((2,3)\), \((3,4)\), and \((2,4)\).
-
-% \subsection{Computations}
-
-% % \begin{figure}
-% %     \centering
-% %     \begin{minipage}{.5\textwidth}
-% %         \centering
-% %         \input{./tikz/example-cech.tex}
-% %     \end{minipage}%
-% %     \begin{minipage}{.5\textwidth}
-% %         \begin{align*}
-% %             C_1 &= \langle (1,2),(1,3),(2,3),(2,% 4),(3,4) \rangle \\
-% %             C_2 &= \langle (1,2,3) \rangle \\
-% %             \ell_2 &= (2,3) - (1,3) + (1,2) \\
-% %             \ell_1 &= (1,3) + (3,4) - (2,4) - % (1,2)
-% %         \end{align*}
-% %     \end{minipage}
-% %     \caption{}
-% %     \label{fig:example-cech}
-% % \end{figure}
-
-% % after having rewritten simplicial homology sec. this is redundant
-% When computing homology, our goal is to identify paths made up of simplices surrounding holes. To do that We'll find all cycles made up of \(n\)-simplices and rule those that are boundaries of \(n+1\)-simplices. This leaves cycles which are boundaries for \(n+1\)-simplices not in the complex.
-
-% % this has not been explained in simplicial homology sec. but needs to be redone
-% The boundary of an \(n\)-simplex will be represented by a linear combination of \((n-1)\)-simplices. For instance, in figure \ref{fig:basic-simplices} the boundary of the \(1\)-simplex is \((2)-(1)\). The boundary of the \(2\)-simplex will include the \(1\)-simplices \((1,2)\), \((2,3)\), and \((3,1)\), which we get by selecting the edges in counterclockwise order. Since we list the vertices in increasing order \((3,1)\) will have a negative sign in the linear combination for the boundary. The boundary for the \(2\)-simplex is \((1,2) + (2,3) - (1,3)\).
-
-% The Boundary Homomorphism generalizes this.
-
-% \begin{definition}
-%     The \textbf{Boundary Homomorphism} \(\boundary_n : C_n \to C_{n-1}\) maps elements from the group of \(n\)-simplices to elements in the group of \((n-1)\)-simplices and is defined by
-%     \[
-%         \boundary_n (v_0,\dots , v_{n}) = \sum_{i=0}^n (-1)^{i}
-%         (v_0,\dots, \widehat{v_i}, \dots, v_n)
-%     \]
-%     \cite{hatcher}
-% \end{definition}
-
-% \begin{theorem}\label{thm:homology-composition}
-%     The composition of two boundary homomorphisms is zero.
-%     \begin{align*}
-% 		\boundary_n \boundary_{n-1} = 0
-% 	\end{align*}
-% \end{theorem}
-
-% \begin{definition}\label{def:nth-homology-group}
-%     The \textbf{n-th Homology Group} is \[H_n = \bigslant{\Ker(\boundary_n)}{\Ima(\boundary_{n+1})}\]
-%     \cite{fraleigha}
-% \end{definition}
-
-% In definition \ref{def:nth-homology-group}, \(\Ker(\boundary_n)\) can be thought of as all the paths of \(n\)-simplices that start and end in the same place.
-% \(\Ima(\boundary_{n+1})\) can be thought of as paths of \(n\)-simplices that surround \((n+1)\)-simplices.
-
-% \begin{figure}
-%     \scalebox{.8}{
-%         \input{./tikz/homology-group-diagram.tex}
-%     }
-%     \caption{}
-%     \label{fig:homology-groups}
-% \end{figure}
-
-% \begin{example}
-%     We'll now calculate the first homology group for the complex given in figure \ref{fig:example-cech}.
-
-%     \(\Ker(\boundary_1)\) can be found by first representing \(C_1\) as a linear combination of its elements.
-
-%     \[s = a(1,2) + b(1,3) + c(2,3) + d(2,4) + e(3,4) \in C_1\]
-
-%     Since the kernel is all of the elements of the domain which map to zero, our goal is to find all values of a,b,c,d, and e, such that \(\boundary(s) = 0\).
-
-%     By applying the boundary homomorphism to an arbitrary element \(s\) in \(C_1\) and setting it equal to zero, we get
-
-%     \[\boundary(a(1,2) + b(1,3) + c(2,3) + d(2,4) + e(3,4)) = a(2) - a(1) + b(3) - b(1) + c(3) - c(2) + d(4) - d(2) + e(4) - e(3) = (-a - b)(1) + (a - c - d)(2) + (b + c - e)(3) + (d + e)(4)\]
-
-%     Solving for the values of \(a,b,c,d,e\) is equivalent to finding the null space of the matrix
-
-%     \begin{align*}
-%         \boundary_1(s) &=
-%             \begin{bmatrix}
-%                 (1)\\(2)\\(3)\\(4)\\
-%             \end{bmatrix}^T
-%             \begin{bmatrix}
-%                 -1 & -1 &  0 &  0 &  0 \\
-%                  1 &  0 & -1 & -1 &  0 \\
-%                  0 &  1 &  1 &  0 & -1 \\
-%                  0 &  0 &  0 &  1 &  1 \\
-%             \end{bmatrix}
-%             \begin{bmatrix}
-%                 a\\b\\c\\d\\e\\
-%             \end{bmatrix}
-%             = 0
-%     \end{align*}
-
-% \end{example}
 
 % \textit{\cite{cohen-steiner} discusses the stability theorem in persistent homology, which would be relevant to this paper. I've seen the theorem before in other papers and understand it to mean that small changes in the data set result in small changes to the homology. I'm having a hard time explaining how this would be useful, but it's supposed to increase confidence in the results of persistent homology. It would also give the paper a more interesting theorem than theorem \ref{thm:homology-composition}. Though theorem \ref{thm:homology-composition} is relevant to understanding definition \ref{def:nth-homology-group} even if it isn't applied.}
 

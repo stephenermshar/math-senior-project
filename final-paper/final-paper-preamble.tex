@@ -10,6 +10,8 @@
 \usepackage{datetime2}
 \usepackage{natbib}
 \usepackage{hyperref}
+\usepackage{mathtools}
+\mathtoolsset{showonlyrefs}
 
 \usetikzlibrary{fadings}
 \usetikzlibrary{patterns}
@@ -85,6 +87,8 @@
   {{\raisebox{0em}{$#1$}\left/\raisebox{0em}{$#2$}\right.}}
   {{\raisebox{0em}{$#1$}\left/\raisebox{0em}{$#2$}\right.}}
 }
+\newcommand{\cross}{\times}
+\newcommand{\normalsubgroup}{\triangleleft}
 \newcommand{\figref}[1]{[Fig. \ref{#1}]}
 \newcommand{\red}[1]{{\color{red} #1}}
 \newcommand{\lightgray}[1]{{\color{lightgray} #1}}
