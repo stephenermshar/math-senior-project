@@ -51,14 +51,15 @@
 % space between paragraphs and lines
 \setlength{\parskip}{5pt}
 \linespread{1.05} % for final submission
-\linespread {2} % for editing drafts
+% \linespread {2} % for editing drafts
 
 % Hyphenation
 \numberwithin{equation}{section}
 \hyphenation{semi-stable}
 
 % Numbering for Theorems, Lemmas, etc.
-\theoremstyle{plain}
+% \theoremstyle{plain}
+\theoremstyle{definition} % on recommendation, for consistency.
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{corollary}[theorem]{Corollary}
 \newtheorem{lemma}[theorem]{Lemma}
@@ -91,7 +92,7 @@
 }
 \newcommand{\cross}{\times}
 \newcommand{\normalsubgroup}{\triangleleft}
-\newcommand{\figref}[1]{[Fig. \ref{#1}]}
-\newcommand{\subfigref}[2]{[Fig. \ref{#1}, #2]}
+\newcommand{\figref}[1]{[Fig.~\ref{#1}]}
+\newcommand{\subfigref}[2]{[Fig.~\ref{#1},~#2]}
 \newcommand{\red}[1]{{\color{red} #1}}
 \newcommand{\lightgray}[1]{{\color{lightgray} #1}}

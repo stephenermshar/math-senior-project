@@ -15,6 +15,7 @@
         "Beamer",
         "Cech",
         "Simplicial",
+        "Wasserstein",
         "abelian",
         "filtrations",
         "ifundefined",
