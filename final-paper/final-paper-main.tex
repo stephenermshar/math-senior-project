@@ -273,7 +273,7 @@ We can see that for values of \(r\) between 30 and 33 there is one hole where th
 At \(r=33\) the balls around the points 1, 2, and 3 intersect, and the triangle \((1,2,3)\) appears, filling in the hole.
 At the same value of \(r\) the edges \((3,4)\) and \((2,4)\) appear and form a hole where the triangle \((2,3,4)\) would be, as seen in Figure \ref{fig:example-cech}.
 At \(r=37\), the triangle \((2,3,4)\) appears, filling in the second hole.
-Finally, at \(r=56\) the balls around every point intersect, forming the tetrahedron \((1,2,3,4)\).
+Finally, at \(r=55\) the balls around every point intersect, forming the tetrahedron \((1,2,3,4)\).
 
 We can extend the analogy of the rubber band to the zeroth homology group as well.
 A rubber band can be thought of as representing a one dimensional cycle in the complex, or a ``rubber'' one dimensional sphere.
@@ -283,19 +283,12 @@ Thus, the zeroth homology group identifies connected components as individual ho
 \begin{figure}
     \centering
     \includegraphics{ipe/example-cech-persistence.pdf}
-    % <29: 4 components, no holes
-    %  30: 2 components, one hole (left)
-    %  33: 1 component, one hole (right)
-    % >37: 1 component, no holes
-    %  55: (1,4) connect
     \caption{}
     \label{fig:example-cech-persistence}
 \end{figure}
 
 We can also represent the persistence barcode in a scatter plot called a persistence diagram \subfigref{fig:example-cech-persistence}{right}, where the axes \(r_b\) and \(r_d\) represent values of \(r\) where a single homology class appears and disappears, respectively.
 The points corresponding to the longest most significant bars will be further from the diagonal.
-
-\red{(Figure \ref{fig:example-cech-persistence} doesn't demonstrate a long bar as well as Figure \ref{fig:persistence-demo-r25}.)}
 
 \subsection{Stability Theorem}\label{sec:stability-theorem}
 
