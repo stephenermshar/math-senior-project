@@ -51,8 +51,8 @@ The holes that persist over a wide range of radius values are considered to be t
 In section \ref{sec:homology} we'll formalize the simplicial complex and its building blocks.
 Then, given an existing simplicial complex we'll solidify the concept with an example computation for finding a hole.
 As we move on to persistent homology in section \ref{sec:persistent-homology}, we'll introduce the \cech complex, which is used to build a simplicial complex given a data set and a radius.
-Having calculated the homology for the \cech complex along a range of scales we'll look at two methods for visualizing the results, and \red{might} look at the stability theorem, which will ensure that the results are reliable.
-Finally, in section \ref{sec:applications} we \red{might} explore applications for persistent homology.
+Having calculated the homology for the \cech complex along a range of scales we'll look at two methods for visualizing the results.
+Finally, in section \ref{sec:applications} we mention some applications for persistent homology.
 
 \section{Homology}\label{sec:homology}
 
@@ -289,45 +289,40 @@ Thus, the zeroth homology group identifies connected components as individual ho
 
 We can also represent the persistence barcode in a scatter plot called a persistence diagram \subfigref{fig:example-cech-persistence}{right}, where the axes \(r_b\) and \(r_d\) represent values of \(r\) where a single homology class appears and disappears, respectively.
 The points corresponding to the longest most significant bars will be further from the diagonal.
+% make connection to "most significant features/structures", maybe reference the article that talked about finding most important features and suppressing others, and how most important features remain the same under changes.
 
-\subsection{Stability Theorem}\label{sec:stability-theorem}
+\section{Applications}\label{sec:applications}
 
-The stability theorem helps guarantee some consistency in the persistence diagrams. Intuitively, two very similar data sets form similar shapes, so their persistence diagrams should be very similar as well.
+One interesting application of persistent homology is to determine a space from which a set of points may have been sampled. \citet{carlssonb} used persistent homology to study a set of high contrast three by three pixel patches sampled from images taken outdoors. Each patch was represented as a nine dimensional vector of the intensity values for each pixel. After normalizing the data and selecting the most densely packed points, persistent homology revealed five one dimensional holes. These holes were shown to correspond to five different ways of reorienting or shifting boundaries between light and dark areas of an image in and out of the patch. A patch could represent a boundary oriented horizontally, vertically, or along the two diagonals. The five transformations represented were shifts along the horizontal, vertical, or two diagonal directions of the patch, and also rotation. This information is being used to develop an image compression algorithm.
 
-\begin{theorem}
-    \red{(Stability Theorem Statement)}
-\end{theorem}
 
-\red{\cite{cohen-steiner} first wrote about the stability theorem, but I first read about it in \cite{wagner}. Both provide intuitive descriptions, and both go in depth on it further than I think I'll have time to follow.}
 
+\section{Conclusion}\label{sec:conclusion}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \lightgray{
 
-    The contrapositive of the stability theorem is that if two persistence diagrams are not similar, then the data must not be similar either.
-    This is leveraged in a demonstration of persistent homology in signal anomaly detection.
-    \cite{aktas} mentions the Wasserstein distance, which used in the signal anomaly detection demo to compare two persistence diagrams.
-
-
-% % this paragraph needs to be moved to persistence sec. but the \(C\) part stays
-% In Figure \ref{fig:example-cech} we start with the points labeled \(1\), \(2\), \(3\), and \(4\). We choose a value for \(r\) and construct a cech complex \(C = \{ (1,2,3), (1,2), (1,3), (2,3), (2,4), (3,4), (1), (2), (3), (4) \}\). With this complex we can fill in the remaining triangle and edges in the graph based on the simplices included in the complex. We can visually observe that this complex has one hole surrounded by \(1\)-simplices \((2,3)\), \((3,4)\), and \((2,4)\).
+% The contrapositive of the stability theorem is that if two persistence diagrams are not similar, then the data must not be similar either.
+% This is leveraged in a demonstration of persistent homology in signal anomaly detection.
+% \cite{aktas} mentions the Wasserstein distance, which used in the signal anomaly detection demo to compare two persistence diagrams.
+\nocite{aktas}
 
 % \textit{\cite{cohen-steiner} discusses the stability theorem in persistent homology, which would be relevant to this paper. I've seen the theorem before in other papers and understand it to mean that small changes in the data set result in small changes to the homology. I'm having a hard time explaining how this would be useful, but it's supposed to increase confidence in the results of persistent homology. It would also give the paper a more interesting theorem than theorem \ref{thm:homology-composition}. Though theorem \ref{thm:homology-composition} is relevant to understanding definition \ref{def:nth-homology-group} even if it isn't applied.}
 
-% \section{Persistent Homology}\label{sec:persistent-homology}
+% The stability theorem helps guarantee some consistency in the persistence diagrams. Intuitively, two very similar data sets form similar shapes, so their persistence diagrams should be very similar as well.
 
-% \subsection{The Cech Complex}\label{sec:cech-complex}
-
-% There are many ways of constructing simplicial complexes from data, but we'll focus on one of the more intuitive and original methods used, the cech complex.
-
-\section{Applications}\label{sec:applications}
+% \red{\cite{cohen-steiner} first wrote about the stability theorem, but I first read about it in \cite{wagner}. Both provide intuitive descriptions, and both go in depth on it further than I think I'll have time to follow.}
+\nocite{cohen-steiner}
 
 }
 
 % \newpage
 
-\bibliographystyle{alpha}
+
+
+% \bibliographystyle{alpha}
+\bibliographystyle{unsrtnat}
 \bibliography{../math496-7-zotero.bib}
 
 \end{document}
