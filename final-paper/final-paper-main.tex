@@ -51,8 +51,8 @@ The holes that persist over a wide range of radius values are considered to be t
 In section \ref{sec:homology} we'll formalize the simplicial complex and its building blocks.
 Then, given an existing simplicial complex we'll solidify the concept with an example computation for finding a hole.
 As we move on to persistent homology in section \ref{sec:persistent-homology}, we'll introduce the \cech complex, which is used to build a simplicial complex given a data set and a radius.
-Having calculated the homology for the \cech complex along a range of scales we'll look at two methods for visualizing the results.
-Finally, in section \ref{sec:application} we look at an application for persistent homology.
+Having calculated the homology for the \cech complex along a range of scales we'll look at two methods for visualizing the results, along with an application of persistent homology.
+Finally, in section \ref{sec:conclusion} we will consider further studies and conclude.
 
 \section{Homology}\label{sec:homology}
 
@@ -78,7 +78,7 @@ A triangle includes its three edges and three vertices, so if a triangle is incl
 
 This will be a useful property because when we study the homology of the complex we will be comparing the boundaries of its \(n\)-simplices, which are \((n-1)\)-simplices, to other \((n-1)\)-simplices in the complex.
 
-Homology will be calculated by finding all the loops of \((n-1)\)-simplices, and ignoring any loops of \((n-1)\)-simplices around \(n\)-simplices, leaving only loops of \((n-1)\)-simplices around empty space that could be filled with \(n\)-simplices.
+Homology will be calculated by finding all the loops of \((n-1)\)-simplices, and collapsing any loops of \((n-1)\)-simplices around \(n\)-simplices, leaving only loops of \((n-1)\)-simplices around empty space that could be filled with \(n\)-simplices.
 These remaining loops are what we intuitively call holes.
 
 A path of \(n\)-simplices can just be thought of as a list of \(n\)-simplices; this makes intuitive sense for 1-simplices, where a list of edges describes a 1-dimensional path through a complex, but still works for larger values of \(n\).
@@ -128,7 +128,6 @@ With the help of Theorem \ref{thm:zero-boundary} we'll also be able to find all 
 
 Since the boundary of a boundary is always zero, the boundary of any element from the group of \((n+1)\)-simplices is in the kernel of the \(n\textsuperscript{th}\) boundary homomorphism, that is, \(\Ima(\boundary_{n+1}) \subseteq \Ker(\boundary_n)\).
 The kernel of a boundary homomorphism will represent all closed paths in a complex \cite{fraleigha}.
-
 Since we're not concerned with the order in which simplices are added, the groups of simplices are abelian, so \(\Ima(\boundary_{n+1})\) is a normal subgroup of \(\Ker(\boundary_{n})  \).
 
 \begin{definition}\label{def:nth-homology-group}
@@ -289,30 +288,31 @@ Thus, the zeroth homology group identifies connected components as individual ho
 \end{figure}
 
 We can also represent the persistence barcode in a scatter plot called a persistence diagram \subfigref{fig:example-cech-persistence}{right}, where the axes \(r_b\) and \(r_d\) represent values of \(r\) where a single homology class appears and disappears, respectively.
-The points corresponding to the longest most significant bars will be further from the diagonal. These points correspond to the most significant features of the shape.
+The points corresponding to the longest bars will be further from the diagonal. These points and the bars they are associated with represent to the most significant features of the shape.
 
-\section{An Application}\label{sec:application}
+\subsection{An Application}
 
-One application of persistent homology is to determine a space from which a set of points may have been sampled.
+One application of persistent homology is to determine a space from which a set of points may have been sampled, leading to a better understanding of the data.
 \citet{carlssonb} used persistent homology to study a set of high contrast three by three pixel patches sampled from images taken outdoors.
 Each patch was represented as a nine-dimensional vector of the intensity values for each pixel.
-After normalizing the data and selecting the most densely packed points, persistent homology revealed five one-dimensional holes.
+After normalizing the data and selecting the most densely packed points, the persistence barcodes generated for the first homology group consistently contained five long bars.
 
-This information helped narrow down the possible shapes that could represent the data, and it was found that the points could be modeled by three circles drawn on a klein bottle so as to intersect in four places (two circles drawn around the neck of the bottle, one along the length of the bottle).
-This was an interesting discovery because the patches were most often linear gradients between light and dark areas, and two circles corresponded to horizontal and vertical shifts of the gradient, while the third represented rotations.
+The knowledge that the data formed a shape with five one-dimensional holes helped narrow down the possible shapes that could represent the data.
+It was found that the points could be modeled by three circles drawn on a klein bottle so as to intersect in four places (two circles drawn around the neck of the bottle, one along the length of the bottle).
+Together these circles form a shape with five holes.
+This was an interesting discovery because the patches were often linear gradients between light and dark areas, and two circles corresponded to horizontal and vertical shifts of the gradient, while the third represented rotations.
+So the structure revealed by persistent homology also had a relevant interpretation.
 The ability to represent patches as points on a surface is being used to develop an image compression algorithm.
 
 \section{Conclusion}\label{sec:conclusion}
 
 Persistent homology provides a useful tool for summarizing a data set in terms of its shape.
 The idea of connecting points for a range of similarity thresholds and observing the most persistent structures of the resulting shapes, is fairly intuitive.
-However, describing qualitative properties of data, such as holes, can lead to meaningful discoveries that might be difficult to make otherwise.
+However, describing qualitative properties of data, such as holes, can help guide researchers to interesting features that might be difficult to find otherwise.
+Persistence diagrams are also known to be reliable representations of a data set due to the stability theorem, which states that small changes to a data set result in small changes to the persistence diagram \cite{cohen-steiner, wagner}.
 
-Most literature on persistent homology often either assumes an understanding of homology, or is able to refer to the concept of holes revealed by persistent homology without requiring the reader to understand the homology calculations done on the complexes.
-
-My goal was to explore homology and persistent homology together to develop a more firm understanding of the latter.
-Another topic that helps ensure persistence diagrams faithfully represent a data set is the Stability theorem, which states that small changes to a data set result in small changes to the persistence diagram \cite{cohen-steiner, wagner}.
-In further study I would like to explore the stability theorem as well as a greater variety of applications of persistent homology.
+Most literature on persistent homology either assumes an understanding of homology, or is able to refer to the concept of holes revealed by persistent homology without requiring the reader to understand the homology calculations done on the complexes.
+In this paper we have explored homology and persistent homology together to develop a more firm understanding of the topic.
 
 \bibliographystyle{unsrtnat}
 \bibliography{../math496-7-zotero.bib}
