@@ -20,6 +20,4 @@ A follow up to the Final presentation, intended to communicate the same informat
 as the presentation along with any additional work that has been done since. It is
 the last major assignment in the second half of the senior seminar sequence.
 
-_This document has not been submitted._
-
-View the source latex files in [./final-paper](./final-paper).
+[Submitted Document Download](https://github.com/stephenermshar/math-senior-project/releases/download/paper-final-draft/final-paper-main.pdf)
